@@ -78,8 +78,8 @@ class Woomizer_Control_Product_Tabs extends WP_Customize_Control {
 				$hidden_value = isset( $form_data[ $tab_id . '_hidden' ] ) ? $form_data[ $tab_id . '_hidden' ] : 'no';
 				$title_value  = isset( $form_data[ $tab_id . '_title' ] ) ? $form_data[ $tab_id . '_title' ] : '';
 			?>
-			<h3><?php echo esc_html( $tab_label ); ?></h3>
-			<div>
+			<h3 class="accordion-toggle accordion-section-title"><?php echo esc_html( $tab_label ); ?></h3>
+			<div class="accordion-content">
 				<div class="woomizer_product_tabs_hidden">
 					<label class="customize-control-title"><?php esc_html_e( 'Hide Tab', 'woomizer' ); ?></label>
 					<input id="woomizer_product_tab_<?php echo esc_attr( $tab_id ); ?>_<?php echo esc_attr( $this->id ); ?>_hidden" type="checkbox" value="yes" data-name="<?php echo esc_attr( $tab_id ); ?>_hidden" <?php checked( $hidden_value, 'yes' ); ?> />
@@ -112,21 +112,20 @@ class Woomizer_Control_Product_Tabs extends WP_Customize_Control {
 	 * @since 1.0.0
 	 */
 	public function enqueue() {
-		wp_enqueue_style( 'jquery-ui', '//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' );
 		$css_file = ( defined( 'WOOMIZER_DEV' ) && WOOMIZER_DEV ) ? add_query_arg( array( 't' => time() ), WOOMIZER_URL . 'assets/css/control-product-tabs.css' ) : WOOMIZER_URL . 'assets/css/control-product-tabs.min.css';
 		wp_enqueue_style(
 			'woomizer-control-product-tabs', // Give the script a unique ID.
 			$css_file, // Define the path to the JS file.
-			array( 'jquery-ui' ), // Define dependencies.
+			array(), // Define dependencies.
 			WOOMIZER_VERSION, // Define a version (optional).
-			true // Specify whether to put in footer (leave this true).
+			false // Specify whether to put in footer (leave this false).
 		);
 
 		$js_file = ( defined( 'WOOMIZER_DEV' ) && WOOMIZER_DEV ) ? add_query_arg( array( 't' => time() ), WOOMIZER_URL . 'assets/js/control-product-tabs.js' ) : WOOMIZER_URL . 'assets/js/control-product-tabs.min.js';
 		wp_enqueue_script(
 			'woomizer-control-product-tabs', // Give the script a unique ID.
 			$js_file, // Define the path to the JS file.
-			array( 'jquery', 'jquery-ui-core', 'jquery-ui-accordion' ), // Define dependencies.
+			array( 'jquery' ), // Define dependencies.
 			WOOMIZER_VERSION, // Define a version (optional).
 			true // Specify whether to put in footer (leave this true).
 		);
