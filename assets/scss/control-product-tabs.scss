@@ -1,3 +1,24 @@
-.ui-accordion .ui-accordion-content {
-    padding: 15px 15px !important;
-}
+ .accordion-toggle {
+     cursor: pointer;
+     margin: 0;
+     &.accordion-section-title {
+         &:after {
+             content: "\f140" !important;
+         }
+         &.open {
+             &:after {
+                 content: "\f142" !important;
+             }
+         }
+         border-left-width: 0 !important;
+     }
+ }
+
+ .accordion-content {
+     display: none;
+     padding: 15px;
+     background-color: rgb(255, 255, 255);
+     border &.default {
+         display: block;
+     }
+ }

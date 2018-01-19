@@ -1,2 +1,16 @@
-.ui-accordion .ui-accordion-content {
-  padding: 15px 15px !important; }
+.accordion-toggle {
+  cursor: pointer;
+  margin: 0; }
+  .accordion-toggle.accordion-section-title {
+    border-left-width: 0 !important; }
+    .accordion-toggle.accordion-section-title:after {
+      content: "\f140" !important; }
+    .accordion-toggle.accordion-section-title.open:after {
+      content: "\f142" !important; }
+
+.accordion-content {
+  display: none;
+  padding: 15px;
+  background-color: white; }
+  border .accordion-content.default {
+    display: block; }
