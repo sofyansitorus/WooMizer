@@ -41,41 +41,4 @@
 		});
 	});
 
-	// Customizer live preview: woomizer_product_single_tab_description_visible
-	wp.customize('woomizer_product_single_tab_description_visible', function (setting) {
-		toggle_description_tab(wp.customize.value('woomizer_product_single_tab_description_visible')());
-		setting.bind(function (newVal) {
-			toggle_description_tab(newVal);
-		});
-
-		function toggle_description_tab(show) {
-			var $tab_wrap = $('.woocommerce-tabs');
-			if (show) {
-				$tab_wrap.find('.description_tab').addClass('active').show();
-				$tab_wrap.find('#tab-description').addClass('active').show();
-			} else {
-				$tab_wrap.find('.description_tab').removeClass('active').show();
-				$tab_wrap.find('#tab-description').removeClass('active').show();
-			}
-		}
-	});
-
-	// Customizer live preview: woomizer_product_single_tab_additional_information_visible
-	wp.customize('woomizer_product_single_tab_additional_information_visible', function (setting) {
-		toggle_additional_information_tab(wp.customize.value('woomizer_product_single_tab_additional_information_visible')());
-		setting.bind(function (newVal) {
-			toggle_additional_information_tab(newVal);
-		});
-
-		function toggle_additional_information_tab(show) {
-			var $tab_wrap = $('.woocommerce-tabs');
-			if (show) {
-				$tab_wrap.find('.additional_information_tab a').show().trigger('click');
-			} else {
-				$tab_wrap.find('.additional_information_tab').hide();
-				$tab_wrap.find('#tab-additional_information').removeClass('active').show();
-			}
-		}
-	});
-
 })(jQuery);
