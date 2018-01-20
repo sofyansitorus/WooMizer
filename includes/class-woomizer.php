@@ -54,25 +54,25 @@ class Woomizer {
 	 */
 	private function init_customizer() {
 		// Initialize the Woomizer_Customize class.
-		$customziser = new Woomizer_Customize();
+		$woomizer_customize = new Woomizer_Customize();
 
 		// Setup the Theme Customizer settings and controls.
-		add_action( 'customize_register', array( $customziser, 'register' ) );
+		add_action( 'customize_register', array( $woomizer_customize, 'register' ) );
 
 		// Enqueue live preview javascript in Theme Customizer admin screen.
-		add_action( 'customize_preview_init', array( $customziser, 'live_preview' ) );
+		add_action( 'customize_preview_init', array( $woomizer_customize, 'live_preview' ) );
 
 		// Filter settings arguments.
-		add_filter( 'customize_dynamic_setting_args', array( $customziser, 'dynamic_setting_args' ), 99, 2 );
+		add_filter( 'customize_dynamic_setting_args', array( $woomizer_customize, 'dynamic_setting_args' ), 99, 2 );
 
 		// Filter product tabs.
-		add_filter( 'woocommerce_product_tabs', array( $customziser, 'product_tabs' ), 99 );
+		add_filter( 'woocommerce_product_tabs', array( $woomizer_customize, 'product_tabs' ), 99 );
 
 		// Filter add to cart button text for product single.
-		add_filter( 'woocommerce_product_single_add_to_cart_text', array( $customziser, 'single_add_to_cart_btn_text' ), 99, 2 );
+		add_filter( 'woocommerce_product_single_add_to_cart_text', array( $woomizer_customize, 'single_add_to_cart_btn_text' ), 99, 2 );
 
 		// Filter add to cart button text for product loop.
-		add_filter( 'woocommerce_product_add_to_cart_text', array( $customziser, 'loop_add_to_cart_btn_text' ), 99, 2 );
+		add_filter( 'woocommerce_product_add_to_cart_text', array( $woomizer_customize, 'loop_add_to_cart_btn_text' ), 99, 2 );
 
 	}
 }
