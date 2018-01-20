@@ -28,8 +28,6 @@
  */
 class Woomizer_Customize {
 
-
-
 	/**
 	 * This hooks into 'customize_register' (available as of WP 3.4) and allows
 	 * you to add new sections and controls to the Theme Customize screen.
