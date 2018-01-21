@@ -14,7 +14,7 @@
  * @wordpress-plugin
  * Plugin Name:       Woomizer
  * Plugin URI:        https://github.com/sofyansitorus/Woomizer
- * Description:       WooCommerce customizer with live preview
+ * Description:       WooCommerce customizer with live preview.
  * Version:           1.0.0
  * Author:            Sofyan Sitorus
  * Author URI:        https://github.com/sofyansitorus
