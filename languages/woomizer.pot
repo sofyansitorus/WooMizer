@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Woomizer\n"
-"POT-Creation-Date: 2018-01-18 06:52+0700\n"
-"PO-Revision-Date: 2018-01-18 06:48+0700\n"
+"POT-Creation-Date: 2018-01-22 06:42+0700\n"
+"PO-Revision-Date: 2018-01-22 06:41+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -34,17 +34,17 @@ msgid "Reviews Tab"
 msgstr ""
 
 #: controls/class-woomizer-control-product-tabs.php:59
-#: includes/class-woomizer-customize.php:308
+#: includes/class-woomizer-customize.php:306
 msgid "Description"
 msgstr ""
 
 #: controls/class-woomizer-control-product-tabs.php:61
-#: includes/class-woomizer-customize.php:310
+#: includes/class-woomizer-customize.php:308
 msgid "Additional Information"
 msgstr ""
 
 #: controls/class-woomizer-control-product-tabs.php:64
-#: includes/class-woomizer-customize.php:313
+#: includes/class-woomizer-customize.php:311
 #, php-format
 msgid "Reviews (%d)"
 msgstr ""
@@ -62,52 +62,52 @@ msgid "Tab Title Text"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-#: includes/class-woomizer-customize.php:49
+#: includes/class-woomizer-customize.php:47
 msgid "Woomizer"
 msgstr ""
 
-#: includes/class-woomizer-customize.php:192
+#: includes/class-woomizer-customize.php:190
 msgid "Products Loop"
 msgstr ""
 
-#: includes/class-woomizer-customize.php:193
+#: includes/class-woomizer-customize.php:191
 msgid "Products loop customization"
 msgstr ""
 
-#: includes/class-woomizer-customize.php:217
-#: includes/class-woomizer-customize.php:289
+#: includes/class-woomizer-customize.php:215
+#: includes/class-woomizer-customize.php:287
 msgid "Add to Cart"
 msgstr ""
 
-#: includes/class-woomizer-customize.php:225
+#: includes/class-woomizer-customize.php:223
 msgid "Simple Product"
 msgstr ""
 
-#: includes/class-woomizer-customize.php:234
+#: includes/class-woomizer-customize.php:232
 msgid "Select options"
 msgstr ""
 
-#: includes/class-woomizer-customize.php:242
+#: includes/class-woomizer-customize.php:240
 msgid "Variable Product"
 msgstr ""
 
-#: includes/class-woomizer-customize.php:251
+#: includes/class-woomizer-customize.php:249
 msgid "View products"
 msgstr ""
 
-#: includes/class-woomizer-customize.php:259
+#: includes/class-woomizer-customize.php:257
 msgid "Grouped Product"
 msgstr ""
 
-#: includes/class-woomizer-customize.php:279
+#: includes/class-woomizer-customize.php:277
 msgid "Single Product"
 msgstr ""
 
-#: includes/class-woomizer-customize.php:280
+#: includes/class-woomizer-customize.php:278
 msgid "Single Product customization"
 msgstr ""
 
-#: includes/class-woomizer-customize.php:297
+#: includes/class-woomizer-customize.php:295
 msgid "Add to cart button text"
 msgstr ""
 
