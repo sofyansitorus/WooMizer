@@ -37,7 +37,14 @@ define( 'WOOMIZER_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WOOMIZER_URL', plugin_dir_url( __FILE__ ) );
 define( 'WOOMIZER_VERSION', '1.0.0' );
 
-if ( ! function_exists( 'woomizer_init' ) && in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
+/**
+ * Check if WooCommerce is active
+ */
+if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
+	return;
+}// End if().
+
+if ( ! function_exists( 'woomizer_init' ) ) {
 	/**
 	 * Initialize the Woomizer class.
 	 *
@@ -55,4 +62,4 @@ if ( ! function_exists( 'woomizer_init' ) && in_array( 'woocommerce/woocommerce.
 		new Woomizer();
 	}
 	woomizer_init();
-}
+}// End if().
