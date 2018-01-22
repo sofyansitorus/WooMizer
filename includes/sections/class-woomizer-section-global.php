@@ -26,7 +26,7 @@
  * @subpackage Woomizer/includes/settings
  * @author     Sofyan Sitorus <sofyansitorus@gmail.com>
  */
-class Woomizer_Section_General extends Woomizer_Section {
+class Woomizer_Section_Global extends Woomizer_Section {
 
 
 	/**
@@ -36,9 +36,9 @@ class Woomizer_Section_General extends Woomizer_Section {
 	 */
 	protected function init_settings() {
 
-		// Adding setting for woomizer_general_flash_sale_text.
+		// Adding setting for woomizer_global_flash_sale_text.
 		$this->add_setting(
-			'general_flash_sale_text',
+			'global_flash_sale_text',
 			array(
 				'default'   => __( 'Sale!', 'woomizer' ),
 				'transport' => 'postMessage',
@@ -46,7 +46,7 @@ class Woomizer_Section_General extends Woomizer_Section {
 			)
 		);
 		$this->add_control(
-			'general_flash_sale_text',
+			'global_flash_sale_text',
 			array(
 				'label'   => __( 'Flash sale text', 'woomizer' ),
 				'section' => $this->get_section_id(),

@@ -9,10 +9,10 @@
 		return;
 	}
 
-	// Customizer live preview: woomizer_general_flash_sale_text
-	wp.customize('woomizer_general_flash_sale_text', function (setting) {
+	// Customizer live preview: woomizer_global_flash_sale_text
+	wp.customize('woomizer_global_flash_sale_text', function (setting) {
 		var $selector = $('.product span.onsale');
-		$selector.text(wp.customize.value('woomizer_general_flash_sale_text')());
+		$selector.text(wp.customize.value('woomizer_global_flash_sale_text')());
 		setting.bind(function (newVal) {
 			$selector.text(newVal);
 		});
