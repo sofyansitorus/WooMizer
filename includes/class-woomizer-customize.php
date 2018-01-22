@@ -43,6 +43,17 @@ class Woomizer_Customize {
 		// Register customizer settings panel.
 		$panel = new Woomizer_Panel( $wp_customize, 'woomizer' );
 
+        // Register customizer settings section: woomizer_section_general.
+        $section_product_loop = new Woomizer_Section_General(
+            $wp_customize,
+            'woomizer_section_general',
+            array(
+                'title' => __('General', 'woomizer'),
+                'panel' => $panel->get_panel_id(),
+            )
+        );
+
+
 		// Register customizer settings section: woomizer_section_product_loop.
 		$section_product_loop = new Woomizer_Section_Product_Loop(
 			$wp_customize,

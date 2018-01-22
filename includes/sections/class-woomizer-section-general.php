@@ -26,115 +26,31 @@
  * @subpackage Woomizer/includes/settings
  * @author     Sofyan Sitorus <sofyansitorus@gmail.com>
  */
-class Woomizer_Section_General extends Woomizer_Setting {
+class Woomizer_Section_General extends Woomizer_Section {
+
 
 	/**
 	 * Adding panel in WordPress customizer.
 	 *
 	 * @since 1.1.0
 	 */
-	protected function init() {
+	protected function add_settings() {
 
-		// Adding new section: woomizer_section_product_single.
-		$this->wp_customize->add_section(
-			'woomizer_section_product_single',
-			array(
-				'priority'    => 10,
-				'capability'  => 'edit_theme_options',
-				'title'       => __( 'Single Product', 'woomizer' ),
-				'description' => __( 'Single Product customization', 'woomizer' ),
-				'panel'       => 'woomizer_panel',
-			)
-		);
-
-		// Adding setting for woomizer_product_single_flash_sale_text.
+		// Adding setting for woomizer_general_flash_sale_text.
 		$this->wp_customize->add_setting(
-			'woomizer_product_single_flash_sale_text',
+			'woomizer_general_flash_sale_text',
 			array(
-				'default'   => __( 'Add to Cart', 'woomizer' ),
+				'default'   => __( 'Sale!', 'woomizer' ),
 				'transport' => 'postMessage',
 				'type'      => 'theme_mod',
 			)
 		);
 		$this->wp_customize->add_control(
-			'woomizer_product_single_flash_sale_text',
+			'woomizer_general_flash_sale_text',
 			array(
 				'label'   => __( 'Flash sale text', 'woomizer' ),
-				'section' => 'woomizer_section_product_single',
+				'section' => $this->get_section_id(),
 			)
 		);
-
-		// Adding setting for woomizer_product_single_add_to_cart_btn_text.
-		$this->wp_customize->add_setting(
-			'woomizer_product_single_add_to_cart_btn_text',
-			array(
-				'default'   => __( 'Add to Cart', 'woomizer' ),
-				'transport' => 'postMessage',
-				'type'      => 'theme_mod',
-			)
-		);
-		$this->wp_customize->add_control(
-			'woomizer_product_single_add_to_cart_btn_text',
-			array(
-				'label'   => __( 'Add to cart button text', 'woomizer' ),
-				'section' => 'woomizer_section_product_single',
-			)
-		);
-
-		// Adding setting for woomizer_product_single_tabs.
-		$this->wp_customize->add_setting(
-			'woomizer_product_single_tabs',
-			array(
-				'default'           => array(
-					'description_hidden'            => 'no',
-					'description_title'             => __( 'Description', 'woomizer' ),
-					'additional_information_hidden' => 'no',
-					'additional_information_title'  => __( 'Additional Information', 'woomizer' ),
-					'reviews_hidden'                => 'no',
-					// Translators: Reviews count.
-					'reviews_title'                 => __( 'Reviews (%d)', 'woomizer' ),
-				),
-				'transport'         => 'postMessage',
-				'type'              => 'theme_mod',
-				'sanitize_callback' => 'stripslashes_deep',
-			)
-		);
-
-		$this->wp_customize->add_control(
-			new Woomizer_Control_Product_Tabs(
-				$this->wp_customize,
-				'woomizer_product_single_tabs',
-				array(
-					'label'   => 'Products Tabs',
-					'section' => 'woomizer_section_product_single',
-				)
-			)
-		);
-		$this->wp_customize->selective_refresh->add_partial(
-			'woomizer_product_single_tabs',
-			array(
-				'selector'        => '.woocommerce-tabs.wc-tabs-wrapper',
-				'render_callback' => array( $this, 'render_callback_woomizer_product_single_tabs' ),
-			)
-		);
-	}
-
-	/**
-	 * Render callback for partial refresh setting: woomizer_product_single_tabs.
-	 *
-	 * @since 1.1.0
-	 */
-	public function render_callback_woomizer_product_single_tabs() {
-		global $product;
-
-		// Try to create new $product object if it was string product slug.
-		if ( ! empty( $product ) && is_string( $product ) ) {
-			$product = get_page_by_path( $product, OBJECT, 'product' );
-			if ( $product ) {
-				$product = wc_get_product( $product->ID );
-			}
-		}
-
-		woocommerce_output_product_data_tabs();
 	}
 }
