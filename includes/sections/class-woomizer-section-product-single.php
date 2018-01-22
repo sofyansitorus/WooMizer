@@ -36,7 +36,7 @@ class Woomizer_Section_Product_Single extends Woomizer_Section {
 	protected function add_settings() {
 
 		// Adding setting for woomizer_product_single_add_to_cart_btn_text.
-		$this->wp_customize->add_setting(
+		$this->add_setting(
 			'woomizer_product_single_add_to_cart_btn_text',
 			array(
 				'default'   => __( 'Add to Cart', 'woomizer' ),
@@ -44,17 +44,16 @@ class Woomizer_Section_Product_Single extends Woomizer_Section {
 				'type'      => 'theme_mod',
 			)
 		);
-		$this->wp_customize->add_control(
+		$this->add_control(
 			'woomizer_product_single_add_to_cart_btn_text',
 			array(
-				'label'   => __( 'Add to cart button text', 'woomizer' ),
-				'section' => $this->get_section_id(),
+				'label' => __( 'Add to cart button text', 'woomizer' ),
 			)
 		);
 
 		// Adding setting for woomizer_product_single_tabs.
-		$this->wp_customize->add_setting(
-			'woomizer_product_single_tabs',
+		$this->add_setting(
+			'product_single_tabs',
 			array(
 				'default'           => array(
 					'description_hidden'            => 'no',
@@ -71,21 +70,20 @@ class Woomizer_Section_Product_Single extends Woomizer_Section {
 			)
 		);
 
-		$this->wp_customize->add_control(
+		$this->add_control(
 			new Woomizer_Control_Product_Tabs(
 				$this->wp_customize,
-				'woomizer_product_single_tabs',
+				'product_single_tabs',
 				array(
-					'label'   => 'Products Tabs',
-					'section' => $this->get_section_id(),
+					'label' => __( 'Products Tabs', 'woomizer' ),
 				)
 			)
 		);
-		$this->wp_customize->selective_refresh->add_partial(
-			'woomizer_product_single_tabs',
+		$this->add_partial(
+			'product_single_tabs',
 			array(
 				'selector'        => '.woocommerce-tabs.wc-tabs-wrapper',
-				'render_callback' => array( $this, 'render_callback_woomizer_product_single_tabs' ),
+				'render_callback' => array( $this, 'render_callback_product_single_tabs' ),
 			)
 		);
 	}
@@ -95,7 +93,7 @@ class Woomizer_Section_Product_Single extends Woomizer_Section {
 	 *
 	 * @since 1.1.0
 	 */
-	public function render_callback_woomizer_product_single_tabs() {
+	public function render_callback_product_single_tabs() {
 		global $product;
 
 		// Try to create new $product object if it was string product slug.
