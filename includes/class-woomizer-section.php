@@ -61,14 +61,6 @@ class Woomizer_Section extends Woomizer_Setting {
 	protected $args;
 
 	/**
-	 * Customizer settings array.
-	 *
-	 * @since 1.1.0
-	 * @var array
-	 */
-	protected $settings;
-
-	/**
 	 * Class constructor.
 	 *
 	 * @since 1.1.0
@@ -131,9 +123,47 @@ class Woomizer_Section extends Woomizer_Setting {
 	}
 
 	/**
+	 * Get panel ID value.
+	 *
+	 * @since 1.1.0
+	 * @return string
+	 */
+	public function get_panel_id() {
+		return $this->panel_id;
+	}
+
+	/**
 	 * Initialize the customizer setting fields. This method must be overrided by child class.
 	 *
 	 * @since 1.1.0
 	 */
 	protected function add_settings() {}
+
+	/**
+	 * Wrap \WP_Customize_Manager::add_setting method for id autoprefix.
+	 *
+	 * @since 1.1.0
+	 */
+	public function add_setting() {
+		$passed_args = func_get_args();
+
+		if ( empty( $passed_args ) ) {
+			return;
+		}
+
+		$setting_id = $passed_args[0];
+
+		$setting_args = ( isset( $passed_args[1] ) && is_array( $passed_args[1] ) ) ? $passed_args[1] : array();
+
+		if ( $setting_id instanceof WP_Customize_Setting ) {
+			$setting_id->id = $this->autoprefix( $setting_id->id );
+		}
+
+		if ( ! $setting_id instanceof WP_Customize_Setting ) {
+			$setting_id = $this->autoprefix( $setting_id );
+		}
+
+		$this->wp_customize->add_setting( $setting_id, $setting_args );
+	}
+
 }
