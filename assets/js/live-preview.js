@@ -1,9 +1,13 @@
 /**
  * This file adds some LIVE to the Theme Customizer live preview.
  */
-(function ($) {
+(function ($, wp) {
 
 	"use strict";
+
+	if ('undefined' === typeof wp || 'undefined' === typeof wp.customize) {
+		return;
+	}
 
 	// Customizer live preview: woomizer_product_loop_add_to_cart_btn_text_simple
 	wp.customize('woomizer_product_loop_add_to_cart_btn_text_simple', function (setting) {
@@ -41,4 +45,11 @@
 		});
 	});
 
-})(jQuery);
+	// Customizer live preview: woomizer_product_single_tabs
+	wp.customize('woomizer_product_single_tabs', function (setting) {
+		wp.customize.selectiveRefresh.bind('partial-content-rendered', function (placement) {
+			$('.wc-tabs-wrapper, .woocommerce-tabs, #rating').trigger('init');
+		});
+	});
+
+})(jQuery, wp);
