@@ -70,7 +70,7 @@ class Woomizer_Setting {
 			$string = implode( '_', $string );
 		}
 
-		if ( 0 === strpos( WOOMIZER_PREFIX, $string ) ) {
+		if ( 0 === strpos( $string, WOOMIZER_PREFIX ) ) {
 			return $string;
 		}
 
