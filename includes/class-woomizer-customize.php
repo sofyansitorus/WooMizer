@@ -84,22 +84,7 @@ class Woomizer_Customize {
 	 */
 	public function product_tabs( $tabs ) {
 		global $product, $post;
-
-		// Try to create new $product object if it was string product slug.
-		if ( ! empty( $product ) && is_string( $product ) ) {
-			$product = get_page_by_path( $product, OBJECT, 'product' );
-			if ( $product ) {
-				$product = wc_get_product( $product->ID );
-			}
-		}
-
-		if ( ! empty( $post ) && is_string( $post ) ) {
-			$post = get_page_by_path( $post, OBJECT, 'product' );
-			if ( $post ) {
-				$post = wc_get_product( $post->ID );
-			}
-		}
-
+		
 		$tab_keys = array(
 			'description',
 			'additional_information',
