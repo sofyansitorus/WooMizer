@@ -166,4 +166,32 @@ class Woomizer_Section extends Woomizer_Setting {
 		$this->wp_customize->add_setting( $setting_id, $setting_args );
 	}
 
+	/**
+	 * Wrap \WP_Customize_Manager::add_control method for id autoprefix.
+	 *
+	 * @since 1.1.0
+	 */
+	public function add_control() {
+		$passed_args = func_get_args();
+
+		if ( empty( $passed_args ) ) {
+			return;
+		}
+
+		$control_id = $passed_args[0];
+
+		$control_args = ( isset( $passed_args[1] ) && is_array( $passed_args[1] ) ) ? $passed_args[1] : array();
+
+		if ( $control_id instanceof WP_Customize_Control ) {
+			$control_id->id = $this->autoprefix( $control_id->id );
+		}
+
+		if ( ! $control_id instanceof WP_Customize_Control ) {
+			$control_id = $this->autoprefix( $control_id );
+		}
+
+		$this->wp_customize->add_control( $control_id, $control_args );
+
+	}
+
 }
