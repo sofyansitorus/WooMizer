@@ -37,16 +37,16 @@ class Woomizer_Section_General extends Woomizer_Section {
 	protected function init_settings() {
 
 		// Adding setting for woomizer_general_flash_sale_text.
-		$this->wp_customize->add_setting(
-			'woomizer_general_flash_sale_text',
+		$this->add_setting(
+			'general_flash_sale_text',
 			array(
 				'default'   => __( 'Sale!', 'woomizer' ),
 				'transport' => 'postMessage',
 				'type'      => 'theme_mod',
 			)
 		);
-		$this->wp_customize->add_control(
-			'woomizer_general_flash_sale_text',
+		$this->add_control(
+			'general_flash_sale_text',
 			array(
 				'label'   => __( 'Flash sale text', 'woomizer' ),
 				'section' => $this->get_section_id(),
