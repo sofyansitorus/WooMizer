@@ -6,7 +6,7 @@
  * public-facing side of the site and the admin area.
  *
  * @link       https://github.com/sofyansitorus
- * @since      1.0.0
+ * @since      1.1.0
  *
  * @package    Woomizer
  * @subpackage Woomizer/includes/settings
@@ -21,7 +21,7 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      1.0.0
+ * @since      1.1.0
  * @package    Woomizer
  * @subpackage Woomizer/includes/settings
  * @author     Sofyan Sitorus <sofyansitorus@gmail.com>
@@ -31,7 +31,7 @@ class Woomizer_Section_Product_Single extends Woomizer_Setting {
 	/**
 	 * Adding panel in WordPress customizer.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	protected function init() {
 
@@ -97,8 +97,27 @@ class Woomizer_Section_Product_Single extends Woomizer_Setting {
 			'woomizer_product_single_tabs',
 			array(
 				'selector'        => '.woocommerce-tabs.wc-tabs-wrapper',
-				'render_callback' => 'woocommerce_output_product_data_tabs',
+				'render_callback' => array( $this, 'render_callback_woomizer_product_single_tabs' ),
 			)
 		);
+	}
+
+	/**
+	 * Render callback for partial refresh setting: woomizer_product_single_tabs.
+	 *
+	 * @since 1.1.0
+	 */
+	public function render_callback_woomizer_product_single_tabs() {
+		global $product;
+
+		// Try to create new $product object if it was string product slug.
+		if ( ! empty( $product ) && is_string( $product ) ) {
+			$product = get_page_by_path( $product, OBJECT, 'product' );
+			if ( $product ) {
+				$product = wc_get_product( $product->ID );
+			}
+		}
+
+		woocommerce_output_product_data_tabs();
 	}
 }

@@ -6,7 +6,7 @@
  * public-facing side of the site and the admin area.
  *
  * @link       https://github.com/sofyansitorus
- * @since      1.0.0
+ * @since      1.1.0
  *
  * @package    Woomizer
  * @subpackage Woomizer/includes
@@ -21,7 +21,7 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      1.0.0
+ * @since      1.1.0
  * @package    Woomizer
  * @subpackage Woomizer/includes
  * @author     Sofyan Sitorus <sofyansitorus@gmail.com>
@@ -31,7 +31,7 @@ class Woomizer_Setting {
 	/**
 	 * WP_Customize_Manager object.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 * @var \WP_Customize_Manager
 	 */
 	protected $wp_customize;
@@ -40,7 +40,7 @@ class Woomizer_Setting {
 	 * This hooks into 'customize_register' (available as of WP 3.4) and allows
 	 * you to add new sections and controls to the Theme Customize screen.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 * @param \WP_Customize_Manager $wp_customize Customize manager class.
 	 */
 	public function __construct( WP_Customize_Manager $wp_customize ) {
@@ -51,7 +51,7 @@ class Woomizer_Setting {
 	/**
 	 * Initialize the customizer setting. This method must be overrided by child class.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	protected function init() {}
 }

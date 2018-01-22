@@ -9,7 +9,7 @@
  * @since      1.0.0
  *
  * @package    Woomizer
- * @subpackage Woomizer/includes
+ * @subpackage Woomizer/includes/controls
  */
 
 /**
@@ -23,7 +23,7 @@
  *
  * @since      1.0.0
  * @package    Woomizer
- * @subpackage Woomizer/includes
+ * @subpackage Woomizer/includes/controls
  * @author     Sofyan Sitorus <sofyansitorus@gmail.com>
  */
 class Woomizer_Control_Divider extends WP_Customize_Control {

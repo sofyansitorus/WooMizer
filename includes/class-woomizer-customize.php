@@ -37,12 +37,42 @@ class Woomizer_Customize {
 	 */
 	public function register( $wp_customize ) {
 
-		// Load custom controls dependencies.
-		$this->load_custom_controls();
+		// Load dependencies.
+		$this->load_dependencies();
 
-		new Woomizer_Panel( $wp_customize );
-		new Woomizer_Section_Product_Loop( $wp_customize );
-		new Woomizer_Section_Product_Single( $wp_customize );
+		$this->init_panel( $wp_customize );
+		$this->init_section_product_loop( $wp_customize );
+		$this->init_section_product_single( $wp_customize );
+	}
+
+	/**
+	 * Initialize customizer settings panel
+	 *
+	 * @since 1.1.0
+	 * @param \WP_Customize_Manager $wp_customize Customize manager class.
+	 */
+	private function init_panel( $wp_customize ) {
+		$obj = new Woomizer_Panel( $wp_customize );
+	}
+
+	/**
+	 * Initialize customizer settings section: product_loop.
+	 *
+	 * @since 1.1.0
+	 * @param \WP_Customize_Manager $wp_customize Customize manager class.
+	 */
+	private function init_section_product_loop( $wp_customize ) {
+		$obj = new Woomizer_Section_Product_Loop( $wp_customize );
+	}
+
+	/**
+	 * Initialize customizer settings section: product_single.
+	 *
+	 * @since 1.1.0
+	 * @param \WP_Customize_Manager $wp_customize Customize manager class.
+	 */
+	private function init_section_product_single( $wp_customize ) {
+		$obj = new Woomizer_Section_Product_Single( $wp_customize );
 	}
 
 	/**
@@ -53,13 +83,20 @@ class Woomizer_Customize {
 	 * @return array
 	 */
 	public function product_tabs( $tabs ) {
-		global $product;
+		global $product, $post;
 
 		// Try to create new $product object if it was string product slug.
 		if ( ! empty( $product ) && is_string( $product ) ) {
 			$product = get_page_by_path( $product, OBJECT, 'product' );
 			if ( $product ) {
 				$product = wc_get_product( $product->ID );
+			}
+		}
+
+		if ( ! empty( $post ) && is_string( $post ) ) {
+			$post = get_page_by_path( $post, OBJECT, 'product' );
+			if ( $post ) {
+				$post = wc_get_product( $post->ID );
 			}
 		}
 
@@ -166,81 +203,6 @@ class Woomizer_Customize {
 	}
 
 	/**
-	 * Add settings field for product_single section
-	 *
-	 * @since 1.0.0
-	 * @param \WP_Customize_Manager $wp_customize Customize manager class.
-	 */
-	private function add_section_product_single( $wp_customize ) {
-
-		// Adding new section: woomizer_section_product_single.
-		$wp_customize->add_section(
-			'woomizer_section_product_single',
-			array(
-				'priority'    => 10,
-				'capability'  => 'edit_theme_options',
-				'title'       => __( 'Single Product', 'woomizer' ),
-				'description' => __( 'Single Product customization', 'woomizer' ),
-				'panel'       => 'woomizer_panel',
-			)
-		);
-
-		// Adding setting for woomizer_product_single_add_to_cart_btn_text.
-		$wp_customize->add_setting(
-			'woomizer_product_single_add_to_cart_btn_text',
-			array(
-				'default'   => __( 'Add to Cart', 'woomizer' ),
-				'transport' => 'postMessage',
-				'type'      => 'theme_mod',
-			)
-		);
-		$wp_customize->add_control(
-			'woomizer_product_single_add_to_cart_btn_text',
-			array(
-				'label'   => __( 'Add to cart button text', 'woomizer' ),
-				'section' => 'woomizer_section_product_single',
-			)
-		);
-
-		// Adding setting for woomizer_product_single_tabs.
-		$wp_customize->add_setting(
-			'woomizer_product_single_tabs',
-			array(
-				'default'           => array(
-					'description_hidden'            => 'no',
-					'description_title'             => __( 'Description', 'woomizer' ),
-					'additional_information_hidden' => 'no',
-					'additional_information_title'  => __( 'Additional Information', 'woomizer' ),
-					'reviews_hidden'                => 'no',
-					// Translators: Reviews count.
-					'reviews_title'                 => __( 'Reviews (%d)', 'woomizer' ),
-				),
-				'transport'         => 'postMessage',
-				'type'              => 'theme_mod',
-				'sanitize_callback' => 'stripslashes_deep',
-			)
-		);
-
-		$wp_customize->add_control(
-			new Woomizer_Control_Product_Tabs(
-				$wp_customize,
-				'woomizer_product_single_tabs',
-				array(
-					'label'   => 'Products Tabs',
-					'section' => 'woomizer_section_product_single',
-				)
-			)
-		);
-		$wp_customize->selective_refresh->add_partial(
-			'woomizer_product_single_tabs',
-			array(
-				'selector'        => '.woocommerce-tabs.wc-tabs-wrapper',
-				'render_callback' => 'woocommerce_output_product_data_tabs',
-			)
-		);
-	}
-
-	/**
 	 * This outputs the javascript needed to automate the live settings preview.
 	 * Also keep in mind that this function isn't necessary unless your settings
 	 * are using 'transport'=>'postMessage' instead of the default 'transport'
@@ -263,19 +225,22 @@ class Woomizer_Customize {
 	}
 
 	/**
-	 * Load custom controls.
+	 * Load customizer setting dependencies.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
-	private function load_custom_controls() {
+	private function load_dependencies() {
+		// Load customizer setting panels dependencies.
 		foreach ( glob( WOOMIZER_PATH . 'includes/panels/class-woomizer-*.php' ) as $filename ) {
 			include_once $filename;
 		}
 
+		// Load customizer setting sections dependencies.
 		foreach ( glob( WOOMIZER_PATH . 'includes/sections/class-woomizer-*.php' ) as $filename ) {
 			include_once $filename;
 		}
 
+		// Load customizer setting controls dependencies.
 		foreach ( glob( WOOMIZER_PATH . 'includes/controls/class-woomizer-control-*.php' ) as $filename ) {
 			include $filename;
 		}

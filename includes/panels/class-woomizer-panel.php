@@ -6,10 +6,10 @@
  * public-facing side of the site and the admin area.
  *
  * @link       https://github.com/sofyansitorus
- * @since      1.0.0
+ * @since      1.1.0
  *
  * @package    Woomizer
- * @subpackage Woomizer/includes/settings
+ * @subpackage Woomizer/includes/panels
  */
 
 /**
@@ -21,9 +21,9 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      1.0.0
+ * @since      1.1.0
  * @package    Woomizer
- * @subpackage Woomizer/includes/settings
+ * @subpackage Woomizer/includes/panels
  * @author     Sofyan Sitorus <sofyansitorus@gmail.com>
  */
 class Woomizer_Panel extends Woomizer_Setting {
@@ -31,7 +31,7 @@ class Woomizer_Panel extends Woomizer_Setting {
 	/**
 	 * Adding panel in WordPress customizer.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	protected function init() {
 		$this->wp_customize->add_panel(
