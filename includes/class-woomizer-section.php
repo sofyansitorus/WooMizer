@@ -212,6 +212,8 @@ class Woomizer_Section extends Woomizer_Setting {
 				$control_id->section = $this->get_section_id();
 			}
 			$control_id->section = $this->autoprefix( $control_id->section );
+			$this->wp_customize->add_control( $control_id, $control_args );
+			return;
 		}
 
 		// Handle if $control_id is not instance of WP_Customize_Control.
@@ -224,10 +226,38 @@ class Woomizer_Section extends Woomizer_Setting {
 				$control_args['section'] = $this->get_section_id();
 			}
 			$control_args['section'] = $this->autoprefix( $control_args['section'] );
+			$this->wp_customize->add_control( $control_id, $control_args );
+			return;
+		}
+	}
+
+	/**
+	 * Wrap \WP_Customize_Selective_Refresh::add_partial method for id autoprefix.
+	 *
+	 * @since 1.1.0
+	 */
+	public function add_partial() {
+		$passed_args = func_get_args();
+
+		if ( empty( $passed_args ) ) {
+			return;
 		}
 
-		$this->wp_customize->add_control( $control_id, $control_args );
+		$customize_partial_id = $passed_args[0];
 
+		$customize_partial_args = ( isset( $passed_args[1] ) && is_array( $passed_args[1] ) ) ? $passed_args[1] : array();
+
+		if ( $customize_partial_id instanceof WP_Customize_Partial && $customize_partial_id->id !== $this->autoprefix( $customize_partial_id->id ) ) {
+			$id   = $this->autoprefix( $customize_partial_id->id );
+			$args = get_object_vars( $customize_partial_id );
+			$this->wp_customize->selective_refresh->add_partial( $id, $args );
+			return;
+		}
+
+		if ( ! $customize_partial_id instanceof WP_Customize_Partial ) {
+			$customize_partial_id = $this->autoprefix( $customize_partial_id );
+			$this->wp_customize->selective_refresh->add_partial( $customize_partial_id, $customize_partial_args );
+		}
 	}
 
 }
