@@ -38,11 +38,11 @@ class Woomizer_Setting {
 	protected function humanize( $slug ) {
 		$words = preg_split( '/(_|-)/', $slug );
 
-		$excludes = array( 'and', 'or', 'to', 'in', 'at', 'in' );
-
-		if ( count( $words ) < 2 ) {
+		if ( empty( $words ) ) {
 			return $slug;
 		}
+
+		$excludes = array( 'and', 'or', 'to', 'in', 'at', 'in' );
 
 		foreach ( $words as $key => $word ) {
 			$word = strtolower( $word );
