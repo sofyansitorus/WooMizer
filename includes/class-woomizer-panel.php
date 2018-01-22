@@ -80,7 +80,7 @@ class Woomizer_Panel extends Woomizer_Setting {
 	 * @since 1.1.0
 	 * @return string
 	 */
-	public function get_id() {
+	public function get_panel_id() {
 		return $this->panel_id;
 	}
 

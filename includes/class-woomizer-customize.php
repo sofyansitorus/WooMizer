@@ -49,7 +49,7 @@ class Woomizer_Customize {
 			'woomizer_section_product_loop',
 			array(
 				'title' => __( 'Product Loop', 'woomizer' ),
-				'panel' => $panel->get_id(),
+				'panel' => $panel->get_panel_id(),
 			)
 		);
 
@@ -59,7 +59,7 @@ class Woomizer_Customize {
 			'woomizer_section_product_single',
 			array(
 				'title' => __( 'Product Single', 'woomizer' ),
-				'panel' => $panel->get_id(),
+				'panel' => $panel->get_panel_id(),
 			)
 		);
 	}
