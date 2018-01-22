@@ -37,6 +37,14 @@ class Woomizer_Section extends Woomizer_Setting {
 	protected $wp_customize;
 
 	/**
+	 * Customizer panel ID.
+	 *
+	 * @since 1.1.0
+	 * @var string
+	 */
+	protected $panel_id;
+
+	/**
 	 * Customizer section ID.
 	 *
 	 * @since 1.1.0
@@ -53,6 +61,14 @@ class Woomizer_Section extends Woomizer_Setting {
 	protected $args;
 
 	/**
+	 * Customizer settings array.
+	 *
+	 * @since 1.1.0
+	 * @var array
+	 */
+	protected $settings;
+
+	/**
 	 * Class constructor.
 	 *
 	 * @since 1.1.0
@@ -61,9 +77,14 @@ class Woomizer_Section extends Woomizer_Setting {
 	 * @param array                 $args Customizer section arguments.
 	 */
 	public function __construct( WP_Customize_Manager $wp_customize, $section_id, $args = array() ) {
+		// Set value for $wp_customize property.
 		$this->wp_customize = $wp_customize;
-		$this->section_id   = $section_id;
-		$this->args         = wp_parse_args(
+
+		// Set value for $section_id property.
+		$this->section_id = $this->autoprefix( $section_id );
+
+		// Set value for $args property.
+		$this->args = wp_parse_args(
 			$args,
 			array(
 				'priority'   => 10,
@@ -71,7 +92,19 @@ class Woomizer_Section extends Woomizer_Setting {
 				'title'      => $this->humanize( $this->section_id ),
 			)
 		);
+
+		// Set value for $panel_id property.
+		if ( empty( $this->args['panel'] ) ) {
+			$this->args['panel'] = WOOMIZER_PREFIX;
+		}
+		$this->args['panel'] = $this->autoprefix( $this->args['panel'] );
+
+		$this->panel_id = $this->args['panel'];
+
+		// Add section to customizer settings.
 		$this->add_section();
+
+		// Add customizer settings fields.
 		$this->add_settings();
 	}
 

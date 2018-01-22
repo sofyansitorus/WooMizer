@@ -41,33 +41,30 @@ class Woomizer_Customize {
 		$this->load_dependencies();
 
 		// Register customizer settings panel.
-		$panel = new Woomizer_Panel( $wp_customize, 'woomizer' );
+		$panel = new Woomizer_Panel( $wp_customize );
 
-        // Register customizer settings section: woomizer_section_general.
-        $section_product_loop = new Woomizer_Section_General(
-            $wp_customize,
-            'woomizer_section_general',
-            array(
-                'title' => __('General', 'woomizer'),
-                'panel' => $panel->get_panel_id(),
-            )
-        );
-
+		// Register customizer settings section: woomizer_section_general.
+		$section_product_loop = new Woomizer_Section_General(
+			$wp_customize,
+			'section_general',
+			array(
+				'title' => __( 'General', 'woomizer' ),
+			)
+		);
 
 		// Register customizer settings section: woomizer_section_product_loop.
 		$section_product_loop = new Woomizer_Section_Product_Loop(
 			$wp_customize,
-			'woomizer_section_product_loop',
+			'section_product_loop',
 			array(
 				'title' => __( 'Product Loop', 'woomizer' ),
-				'panel' => $panel->get_panel_id(),
 			)
 		);
 
 		// Register customizer settings section: woomizer_section_product_single.
 		$section_product_loop = new Woomizer_Section_Product_Single(
 			$wp_customize,
-			'woomizer_section_product_single',
+			'section_product_single',
 			array(
 				'title' => __( 'Product Single', 'woomizer' ),
 				'panel' => $panel->get_panel_id(),
