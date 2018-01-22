@@ -35,22 +35,14 @@ class Woomizer_Customize {
 	 * @since 1.0.0
 	 * @param \WP_Customize_Manager $wp_customize Customize manager class.
 	 */
-	public static function register( $wp_customize ) {
+	public function register( $wp_customize ) {
 
 		// Load custom controls dependencies.
 		$this->load_custom_controls();
 
-		// Adding panel in WordPress customizer.
-		$wp_customize->add_panel(
-			'woomizer_panel',
-			array(
-				'title'      => __( 'Woomizer', 'woomizer' ),
-				'capability' => 'edit_theme_options',
-			)
-		);
-
-		$this->add_section_products_loop( $wp_customize );
-		$this->add_section_product_single( $wp_customize );
+		new Woomizer_Panel( $wp_customize );
+		new Woomizer_Section_Product_Loop( $wp_customize );
+		new Woomizer_Section_Product_Single( $wp_customize );
 	}
 
 	/**
@@ -174,93 +166,6 @@ class Woomizer_Customize {
 	}
 
 	/**
-	 * Add settings field for products_loop section
-	 *
-	 * @since 1.0.0
-	 * @param \WP_Customize_Manager $wp_customize Customize manager class.
-	 */
-	private function add_section_products_loop( $wp_customize ) {
-
-		// Adding new section: woomizer_section_products_loop.
-		$wp_customize->add_section(
-			'woomizer_section_products_loop',
-			array(
-				'priority'    => 10,
-				'capability'  => 'edit_theme_options',
-				'title'       => __( 'Products Loop', 'woomizer' ),
-				'description' => __( 'Products loop customization', 'woomizer' ),
-				'panel'       => 'woomizer_panel',
-			)
-		);
-
-		// Adding setting for woomizer_products_loop_add_to_cart_btn_text.
-		$wp_customize->add_setting(
-			'woomizer_products_loop_add_to_cart_btn_text'
-		);
-		$wp_customize->add_control(
-			new Woomizer_Control_Divider(
-				$wp_customize,
-				'woomizer_products_loop_add_to_cart_btn_text',
-				array(
-					'label'   => 'Add to Cart Button Text',
-					'section' => 'woomizer_section_products_loop',
-				)
-			)
-		);
-
-		// Adding setting for woomizer_products_loop_add_to_cart_btn_text_simple.
-		$wp_customize->add_setting(
-			'woomizer_products_loop_add_to_cart_btn_text_simple',
-			array(
-				'default'   => __( 'Add to Cart', 'woomizer' ),
-				'transport' => 'postMessage',
-				'type'      => 'theme_mod',
-			)
-		);
-		$wp_customize->add_control(
-			'woomizer_products_loop_add_to_cart_btn_text_simple',
-			array(
-				'label'   => __( 'Simple Product', 'woomizer' ),
-				'section' => 'woomizer_section_products_loop',
-			)
-		);
-
-		// Adding setting for woomizer_products_loop_add_to_cart_btn_text_variable.
-		$wp_customize->add_setting(
-			'woomizer_products_loop_add_to_cart_btn_text_variable',
-			array(
-				'default'   => __( 'Select options', 'woomizer' ),
-				'transport' => 'postMessage',
-				'type'      => 'theme_mod',
-			)
-		);
-		$wp_customize->add_control(
-			'woomizer_products_loop_add_to_cart_btn_text_variable',
-			array(
-				'label'   => __( 'Variable Product', 'woomizer' ),
-				'section' => 'woomizer_section_products_loop',
-			)
-		);
-
-		// Adding setting for woomizer_products_loop_add_to_cart_btn_text_grouped.
-		$wp_customize->add_setting(
-			'woomizer_products_loop_add_to_cart_btn_text_grouped',
-			array(
-				'default'   => __( 'View products', 'woomizer' ),
-				'transport' => 'postMessage',
-				'type'      => 'theme_mod',
-			)
-		);
-		$wp_customize->add_control(
-			'woomizer_products_loop_add_to_cart_btn_text_grouped',
-			array(
-				'label'   => __( 'Grouped Product', 'woomizer' ),
-				'section' => 'woomizer_section_products_loop',
-			)
-		);
-	}
-
-	/**
 	 * Add settings field for product_single section
 	 *
 	 * @since 1.0.0
@@ -363,7 +268,15 @@ class Woomizer_Customize {
 	 * @since 1.0.0
 	 */
 	private function load_custom_controls() {
-		foreach ( glob( WOOMIZER_PATH . 'controls/class-woomizer-control-*.php' ) as $filename ) {
+		foreach ( glob( WOOMIZER_PATH . 'includes/panels/class-woomizer-*.php' ) as $filename ) {
+			include_once $filename;
+		}
+
+		foreach ( glob( WOOMIZER_PATH . 'includes/sections/class-woomizer-*.php' ) as $filename ) {
+			include_once $filename;
+		}
+
+		foreach ( glob( WOOMIZER_PATH . 'includes/controls/class-woomizer-control-*.php' ) as $filename ) {
 			include $filename;
 		}
 	}
