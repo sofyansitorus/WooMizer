@@ -42,14 +42,17 @@ class Woomizer_Setting {
 			return $slug;
 		}
 
-		$excludes = array( 'and', 'or', 'to', 'in', 'at', 'in' );
+		$excludes = apply_filters( 'woomizer_setting_humanize', array( 'a', 'and', 'or', 'to', 'in', 'at', 'in', 'of' ) );
 
 		foreach ( $words as $key => $word ) {
-			$word = strtolower( $word );
-			if ( strlen( $word ) === 1 || preg_match( '/^\d/', $word ) || in_array( $word, $excludes, true ) ) {
+			if ( preg_match( '/^\d/', $word ) ) {
 				continue;
 			}
-			$words[ $key ] = ucwords( $word );
+			if ( in_array( strtolower( $word ), $excludes, true ) ) {
+				$words[ $key ] = strtolower( $word );
+				continue;
+			}
+			$words[ $key ] = ucwords( strtolower( $word ) );
 		}
 
 		return implode( ' ', $words );
