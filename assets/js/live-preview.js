@@ -9,6 +9,15 @@
 		return;
 	}
 
+	// Customizer live preview: woomizer_general_flash_sale_text
+	wp.customize('woomizer_general_flash_sale_text', function (setting) {
+		var $selector = $('.product span.onsale');
+		$selector.text(wp.customize.value('woomizer_general_flash_sale_text')());
+		setting.bind(function (newVal) {
+			$selector.text(newVal);
+		});
+	});
+
 	// Customizer live preview: woomizer_product_loop_add_to_cart_btn_text_simple
 	wp.customize('woomizer_product_loop_add_to_cart_btn_text_simple', function (setting) {
 		var $selector_simple = $('.product-type-simple .product_type_simple');
