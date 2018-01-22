@@ -43,8 +43,8 @@ class Woomizer {
 	private function __construct() {
 		add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain' ) );
 		$this->load_dependencies();
+		$this->register_hooks();
 		$this->init_customizer();
-		$this->init_hooks();
 	}
 
 	/**
@@ -83,6 +83,30 @@ class Woomizer {
 	}
 
 	/**
+	 * Register hooks.
+	 *
+	 * @since    1.1.0
+	 */
+	private function register_hooks() {
+
+		// Initialize the Woomizer_Hooks class.
+		$obj_hooks = new Woomizer_Hooks();
+
+		// Filter settings arguments.
+		add_filter( 'customize_dynamic_setting_args', array( $obj_hooks, 'dynamic_setting_args' ), 99, 2 );
+
+		// Filter product tabs.
+		add_filter( 'woocommerce_product_tabs', array( $obj_hooks, 'product_tabs' ), 99 );
+
+		// Filter add to cart button text for product single.
+		add_filter( 'woocommerce_product_single_add_to_cart_text', array( $obj_hooks, 'single_add_to_cart_btn_text' ), 99, 2 );
+
+		// Filter add to cart button text for product loop.
+		add_filter( 'woocommerce_product_add_to_cart_text', array( $obj_hooks, 'loop_add_to_cart_btn_text' ), 99, 2 );
+
+	}
+
+	/**
 	 * Load customizer.
 	 *
 	 * @since    1.0.0
@@ -90,37 +114,13 @@ class Woomizer {
 	private function init_customizer() {
 
 		// Initialize the Woomizer_Customize class.
-		$woomizer_customize = new Woomizer_Customize();
+		$obj_customize = new Woomizer_Customize();
 
 		// Setup the Theme Customizer settings and controls.
-		add_action( 'customize_register', array( $woomizer_customize, 'register' ) );
+		add_action( 'customize_register', array( $obj_customize, 'register' ) );
 
 		// Enqueue live preview javascript in Theme Customizer admin screen.
-		add_action( 'customize_preview_init', array( $woomizer_customize, 'live_preview' ) );
-
-	}
-
-	/**
-	 * Load customizer.
-	 *
-	 * @since    1.1.0
-	 */
-	private function init_hooks() {
-
-		// Initialize the Woomizer_Hooks class.
-		$woomizer_hooks = new Woomizer_Hooks();
-
-		// Filter settings arguments.
-		add_filter( 'customize_dynamic_setting_args', array( $woomizer_hooks, 'dynamic_setting_args' ), 99, 2 );
-
-		// Filter product tabs.
-		add_filter( 'woocommerce_product_tabs', array( $woomizer_hooks, 'product_tabs' ), 99 );
-
-		// Filter add to cart button text for product single.
-		add_filter( 'woocommerce_product_single_add_to_cart_text', array( $woomizer_hooks, 'single_add_to_cart_btn_text' ), 99, 2 );
-
-		// Filter add to cart button text for product loop.
-		add_filter( 'woocommerce_product_add_to_cart_text', array( $woomizer_hooks, 'loop_add_to_cart_btn_text' ), 99, 2 );
+		add_action( 'customize_preview_init', array( $obj_customize, 'live_preview' ) );
 
 	}
 }
