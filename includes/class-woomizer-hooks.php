@@ -102,19 +102,19 @@ class Woomizer_Hooks {
 				return $text;
 				break;
 			case 'simple':
-				$custom_text = get_theme_mod( 'woomizer_products_loop_add_to_cart_btn_text_simple' );
+				$custom_text = get_theme_mod( 'woomizer_product_loop_add_to_cart_btn_text_simple' );
 				if ( ! empty( $custom_text ) && $product->is_purchasable() && $product->is_in_stock() ) {
 					return $custom_text;
 				}
 				break;
 			case 'variable':
-				$custom_text = get_theme_mod( 'woomizer_products_loop_add_to_cart_btn_text_variable' );
+				$custom_text = get_theme_mod( 'woomizer_product_loop_add_to_cart_btn_text_variable' );
 				if ( ! empty( $custom_text ) && $product->is_purchasable() ) {
 					return $custom_text;
 				}
 				break;
 			case 'grouped':
-				$custom_text = get_theme_mod( 'woomizer_products_loop_add_to_cart_btn_text_grouped' );
+				$custom_text = get_theme_mod( 'woomizer_product_loop_add_to_cart_btn_text_grouped' );
 				if ( ! empty( $custom_text ) ) {
 					return $custom_text;
 				}
