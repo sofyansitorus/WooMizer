@@ -57,4 +57,23 @@ class Woomizer_Setting {
 
 		return implode( ' ', $words );
 	}
+
+	/**
+	 * Add plugin prefix if not exist.
+	 *
+	 * @since 1.1.0
+	 * @param string $string String that will be prefixed.
+	 * @return string
+	 */
+	protected function autoprefix( $string ) {
+		if ( is_array( $string ) ) {
+			$string = implode( '_', $string );
+		}
+
+		if ( 0 === strpos( WOOMIZER_PREFIX, $string ) ) {
+			return $string;
+		}
+
+		return WOOMIZER_PREFIX . '_' . trim( $string, '_' );
+	}
 }
