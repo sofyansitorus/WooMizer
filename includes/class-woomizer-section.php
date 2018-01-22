@@ -182,12 +182,48 @@ class Woomizer_Section extends Woomizer_Setting {
 
 		$control_args = ( isset( $passed_args[1] ) && is_array( $passed_args[1] ) ) ? $passed_args[1] : array();
 
+		// Handle if $control_id is instance of WP_Customize_Control.
 		if ( $control_id instanceof WP_Customize_Control ) {
+
+			// Modify value for WP_Customize_Control::id.
 			$control_id->id = $this->autoprefix( $control_id->id );
+
+			// Modify value for WP_Customize_Control::settings.
+			$settings = array();
+			foreach ( $control_id->settings as $key => $setting ) {
+				if ( ! empty( $setting ) ) {
+					$settings[ $key ] = $setting;
+					continue;
+				}
+				switch ( $key ) {
+					case 'default':
+						$settings[ $key ] = $control_id->manager->get_setting( $control_id->id );
+						break;
+
+					default:
+						$settings[ $this->autoprefix( $key ) ] = $control_id->manager->get_setting( $this->autoprefix( $key ) );
+						break;
+				}
+			}
+			$control_id->settings = $settings;
+
+			// Modify value for WP_Customize_Control::section.
+			if ( empty( $control_id->section ) ) {
+				$control_id->section = $this->get_section_id();
+			}
+			$control_id->section = $this->autoprefix( $control_id->section );
 		}
 
+		// Handle if $control_id is not instance of WP_Customize_Control.
 		if ( ! $control_id instanceof WP_Customize_Control ) {
+			// Modify value for WP_Customize_Control::id.
 			$control_id = $this->autoprefix( $control_id );
+
+			// Modify value for WP_Customize_Control::section.
+			if ( empty( $control_args['section'] ) ) {
+				$control_args['section'] = $this->get_section_id();
+			}
+			$control_args['section'] = $this->autoprefix( $control_args['section'] );
 		}
 
 		$this->wp_customize->add_control( $control_id, $control_args );
