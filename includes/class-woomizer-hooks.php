@@ -125,6 +125,18 @@ class Woomizer_Hooks {
 	}
 
 	/**
+	 * Filter flash sale text for all products.
+	 *
+	 * @since 1.1.0
+	 * @param string $text Current flash sale text.
+	 * @return string
+	 */
+	public function general_sale_flash( $text ) {
+		$custom_text = get_theme_mod( 'woomizer_general_flash_sale_text' );
+		return '<span class="onsale">' . esc_html( $custom_text ) . '</span>';
+	}
+
+	/**
 	 * Filter the settings arguments for woomizer_product_single_tabs.
 	 *
 	 * @since 1.1.0

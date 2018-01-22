@@ -104,6 +104,9 @@ class Woomizer {
 		// Filter add to cart button text for product loop.
 		add_filter( 'woocommerce_product_add_to_cart_text', array( $obj_hooks, 'loop_add_to_cart_btn_text' ), 99, 2 );
 
+		// Filter add to cart button text for product loop.
+		add_filter( 'woocommerce_sale_flash', array( $obj_hooks, 'general_sale_flash' ), 99 );
+
 	}
 
 	/**
