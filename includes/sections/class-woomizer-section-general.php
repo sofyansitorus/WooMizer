@@ -34,7 +34,7 @@ class Woomizer_Section_General extends Woomizer_Section {
 	 *
 	 * @since 1.1.0
 	 */
-	protected function add_settings() {
+	protected function init_settings() {
 
 		// Adding setting for woomizer_general_flash_sale_text.
 		$this->wp_customize->add_setting(

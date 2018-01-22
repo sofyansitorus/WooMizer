@@ -33,7 +33,7 @@ class Woomizer_Section_Product_Loop extends Woomizer_Section {
 	 *
 	 * @since 1.1.0
 	 */
-	protected function add_settings() {
+	protected function init_settings() {
 
 		// Adding setting for woomizer_product_loop_add_to_cart_btn_text.
 		$this->add_setting(
@@ -44,7 +44,7 @@ class Woomizer_Section_Product_Loop extends Woomizer_Section {
 				$this->wp_customize,
 				'product_loop_add_to_cart_btn_text',
 				array(
-					'label'   => 'Add to Cart Button Text',
+					'label' => 'Add to Cart Button Text',
 				)
 			)
 		);
@@ -77,7 +77,7 @@ class Woomizer_Section_Product_Loop extends Woomizer_Section {
 		$this->add_control(
 			'product_loop_add_to_cart_btn_text_variable',
 			array(
-				'label'   => __( 'Variable Product', 'woomizer' ),
+				'label' => __( 'Variable Product', 'woomizer' ),
 			)
 		);
 
@@ -93,7 +93,7 @@ class Woomizer_Section_Product_Loop extends Woomizer_Section {
 		$this->add_control(
 			'product_loop_add_to_cart_btn_text_grouped',
 			array(
-				'label'   => __( 'Grouped Product', 'woomizer' ),
+				'label' => __( 'Grouped Product', 'woomizer' ),
 			)
 		);
 	}

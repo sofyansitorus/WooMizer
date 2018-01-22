@@ -97,7 +97,7 @@ class Woomizer_Section extends Woomizer_Setting {
 		$this->add_section();
 
 		// Add customizer settings fields.
-		$this->add_settings();
+		$this->init_settings();
 	}
 
 	/**
@@ -137,7 +137,7 @@ class Woomizer_Section extends Woomizer_Setting {
 	 *
 	 * @since 1.1.0
 	 */
-	protected function add_settings() {}
+	protected function init_settings() {}
 
 	/**
 	 * Wrap \WP_Customize_Manager::add_setting method for id autoprefix.

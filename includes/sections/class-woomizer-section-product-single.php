@@ -33,7 +33,7 @@ class Woomizer_Section_Product_Single extends Woomizer_Section {
 	 *
 	 * @since 1.1.0
 	 */
-	protected function add_settings() {
+	protected function init_settings() {
 
 		// Adding setting for woomizer_product_single_add_to_cart_btn_text.
 		$this->add_setting(
