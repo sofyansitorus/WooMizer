@@ -53,11 +53,10 @@ if ( ! function_exists( 'woomizer_init' ) ) {
 	 */
 	function woomizer_init() {
 		// Include the dependencies.
-		require_once WOOMIZER_PATH . 'includes/class-woomizer-setting.php';
-		require_once WOOMIZER_PATH . 'includes/class-woomizer-customize.php';
 		require_once WOOMIZER_PATH . 'includes/class-woomizer.php';
 
-		new Woomizer();
+		// Initialize main class.
+		Woomizer::init();
 	}
 	woomizer_init();
 }// End if().

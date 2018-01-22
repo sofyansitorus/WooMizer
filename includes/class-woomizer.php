@@ -28,13 +28,33 @@
  */
 class Woomizer {
 	/**
+	 * Class instance
+	 *
+	 * @since    1.1.0
+	 * @var \Woomizer
+	 */
+	private static $_instance = null;
+
+	/**
 	 * Constructor for your shipping class
 	 *
 	 * @since    1.0.0
 	 */
-	public function __construct() {
+	private function __construct() {
 		add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain' ) );
 		$this->init_customizer();
+	}
+
+	/**
+	 * Get Instance
+	 *
+	 * @since    1.1.0
+	 */
+	public static function init() {
+		if ( is_null( self::$_instance ) ) {
+			self::$_instance = new self();
+		}
+		return self::$_instance;
 	}
 
 	/**
@@ -46,13 +66,16 @@ class Woomizer {
 		load_plugin_textdomain( 'woomizer', false, basename( WOOMIZER_PATH ) . '/languages' );
 	}
 
-
 	/**
 	 * Load customizer.
 	 *
 	 * @since    1.0.0
 	 */
 	private function init_customizer() {
+		// Load dependencies.
+		require_once WOOMIZER_PATH . 'includes/class-woomizer-setting.php';
+		require_once WOOMIZER_PATH . 'includes/class-woomizer-customize.php';
+
 		// Initialize the Woomizer_Customize class.
 		$woomizer_customize = new Woomizer_Customize();
 
