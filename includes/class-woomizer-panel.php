@@ -60,10 +60,18 @@ class Woomizer_Panel extends Woomizer_Setting {
 	 * @param string                $panel_id Customizer panel ID.
 	 * @param array                 $args Customizer panel arguments.
 	 */
-	public function __construct( WP_Customize_Manager $wp_customize, $panel_id, $args = array() ) {
+	public function __construct( WP_Customize_Manager $wp_customize, $panel_id = null, $args = array() ) {
+		// Set value for $wp_customize property.
 		$this->wp_customize = $wp_customize;
-		$this->panel_id     = $panel_id;
-		$this->args         = wp_parse_args(
+
+		// Set value for $panel_id property.
+		$this->panel_id = $panel_id;
+		if ( empty( $this->panel_id ) ) {
+			$this->panel_id = WOOMIZER_PREFIX;
+		}
+
+		// Set value for $args property.
+		$this->args = wp_parse_args(
 			$args,
 			array(
 				'priority'   => 1111,
@@ -71,6 +79,8 @@ class Woomizer_Panel extends Woomizer_Setting {
 				'title'      => $this->humanize( $this->panel_id ),
 			)
 		);
+
+		// Add panel to customizer settings.
 		$this->add_panel();
 	}
 

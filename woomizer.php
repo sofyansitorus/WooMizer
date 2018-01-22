@@ -36,6 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'WOOMIZER_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WOOMIZER_URL', plugin_dir_url( __FILE__ ) );
 define( 'WOOMIZER_VERSION', '1.0.0' );
+define( 'WOOMIZER_PREFIX', 'woomizer' );
 
 /**
  * Check if WooCommerce is active
