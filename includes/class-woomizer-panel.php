@@ -69,6 +69,7 @@ class Woomizer_Panel extends Woomizer_Setting {
 		if ( empty( $this->panel_id ) ) {
 			$this->panel_id = WOOMIZER_PREFIX;
 		}
+		$this->panel_id = $this->autoprefix( $this->panel_id );
 
 		// Set value for $args property.
 		$this->args = wp_parse_args(
@@ -76,9 +77,12 @@ class Woomizer_Panel extends Woomizer_Setting {
 			array(
 				'priority'   => 1111,
 				'capability' => 'edit_theme_options',
-				'title'      => $this->humanize( $this->panel_id ),
 			)
 		);
+
+		if ( empty( $this->args['title'] ) ) {
+			$this->args['title'] = $this->humanize( $this->panel_id );
+		}
 
 		// Add panel to customizer settings.
 		$this->add_panel();
