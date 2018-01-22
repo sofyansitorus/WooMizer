@@ -84,7 +84,7 @@ class Woomizer_Customize {
 	 */
 	public function product_tabs( $tabs ) {
 		global $product, $post;
-		
+
 		$tab_keys = array(
 			'description',
 			'additional_information',
