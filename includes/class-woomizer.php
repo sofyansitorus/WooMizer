@@ -76,6 +76,8 @@ class Woomizer {
 	private function load_dependencies() {
 		// Load dependencies.
 		require_once WOOMIZER_PATH . 'includes/class-woomizer-setting.php';
+		require_once WOOMIZER_PATH . 'includes/class-woomizer-panel.php';
+		require_once WOOMIZER_PATH . 'includes/class-woomizer-section.php';
 		require_once WOOMIZER_PATH . 'includes/class-woomizer-customize.php';
 		require_once WOOMIZER_PATH . 'includes/class-woomizer-hooks.php';
 	}

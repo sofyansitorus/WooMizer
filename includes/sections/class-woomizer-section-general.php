@@ -26,14 +26,26 @@
  * @subpackage Woomizer/includes/settings
  * @author     Sofyan Sitorus <sofyansitorus@gmail.com>
  */
-class Woomizer_Section_Product_Single extends Woomizer_Section {
+class Woomizer_Section_General extends Woomizer_Setting {
 
 	/**
 	 * Adding panel in WordPress customizer.
 	 *
 	 * @since 1.1.0
 	 */
-	protected function add_settings() {
+	protected function init() {
+
+		// Adding new section: woomizer_section_product_single.
+		$this->wp_customize->add_section(
+			'woomizer_section_product_single',
+			array(
+				'priority'    => 10,
+				'capability'  => 'edit_theme_options',
+				'title'       => __( 'Single Product', 'woomizer' ),
+				'description' => __( 'Single Product customization', 'woomizer' ),
+				'panel'       => 'woomizer_panel',
+			)
+		);
 
 		// Adding setting for woomizer_product_single_flash_sale_text.
 		$this->wp_customize->add_setting(
@@ -48,7 +60,7 @@ class Woomizer_Section_Product_Single extends Woomizer_Section {
 			'woomizer_product_single_flash_sale_text',
 			array(
 				'label'   => __( 'Flash sale text', 'woomizer' ),
-				'section' => $this->get_section_id(),
+				'section' => 'woomizer_section_product_single',
 			)
 		);
 
@@ -65,7 +77,7 @@ class Woomizer_Section_Product_Single extends Woomizer_Section {
 			'woomizer_product_single_add_to_cart_btn_text',
 			array(
 				'label'   => __( 'Add to cart button text', 'woomizer' ),
-				'section' => $this->get_section_id(),
+				'section' => 'woomizer_section_product_single',
 			)
 		);
 
@@ -94,7 +106,7 @@ class Woomizer_Section_Product_Single extends Woomizer_Section {
 				'woomizer_product_single_tabs',
 				array(
 					'label'   => 'Products Tabs',
-					'section' => $this->get_section_id(),
+					'section' => 'woomizer_section_product_single',
 				)
 			)
 		);

@@ -29,29 +29,29 @@
 class Woomizer_Setting {
 
 	/**
-	 * WP_Customize_Manager object.
+	 * Humanize slug to make them readable.
 	 *
 	 * @since 1.1.0
-	 * @var \WP_Customize_Manager
+	 * @param string $slug Slug string that will be humanized.
+	 * @return string
 	 */
-	protected $wp_customize;
+	protected function humanize( $slug ) {
+		$words = preg_split( '/(_|-)/', $slug );
 
-	/**
-	 * This hooks into 'customize_register' (available as of WP 3.4) and allows
-	 * you to add new sections and controls to the Theme Customize screen.
-	 *
-	 * @since 1.1.0
-	 * @param \WP_Customize_Manager $wp_customize Customize manager class.
-	 */
-	public function __construct( WP_Customize_Manager $wp_customize ) {
-		$this->wp_customize = $wp_customize;
-		$this->init();
+		$excludes = array( 'and', 'or', 'to', 'in', 'at', 'in' );
+
+		if ( count( $words ) < 2 ) {
+			return $slug;
+		}
+
+		foreach ( $words as $key => $word ) {
+			$word = strtolower( $word );
+			if ( strlen( $word ) === 1 || preg_match( '/^\d/', $word ) || in_array( $word, $excludes, true ) ) {
+				continue;
+			}
+			$words[ $key ] = ucwords( $word );
+		}
+
+		return implode( ' ', $words );
 	}
-
-	/**
-	 * Initialize the customizer setting. This method must be overrided by child class.
-	 *
-	 * @since 1.1.0
-	 */
-	protected function init() {}
 }

@@ -26,26 +26,14 @@
  * @subpackage Woomizer/includes/sections
  * @author     Sofyan Sitorus <sofyansitorus@gmail.com>
  */
-class Woomizer_Section_Product_Loop extends Woomizer_Setting {
+class Woomizer_Section_Product_Loop extends Woomizer_Section {
 
 	/**
 	 * Adding panel in WordPress customizer.
 	 *
 	 * @since 1.1.0
 	 */
-	protected function init() {
-
-		// Adding new section: woomizer_section_products_loop.
-		$this->wp_customize->add_section(
-			'woomizer_section_products_loop',
-			array(
-				'priority'    => 10,
-				'capability'  => 'edit_theme_options',
-				'title'       => __( 'Products Loop', 'woomizer' ),
-				'description' => __( 'Products loop customization', 'woomizer' ),
-				'panel'       => 'woomizer_panel',
-			)
-		);
+	protected function add_settings() {
 
 		// Adding setting for woomizer_products_loop_add_to_cart_btn_text.
 		$this->wp_customize->add_setting(
@@ -57,7 +45,7 @@ class Woomizer_Section_Product_Loop extends Woomizer_Setting {
 				'woomizer_products_loop_add_to_cart_btn_text',
 				array(
 					'label'   => 'Add to Cart Button Text',
-					'section' => 'woomizer_section_products_loop',
+					'section' => $this->get_section_id(),
 				)
 			)
 		);
@@ -75,7 +63,7 @@ class Woomizer_Section_Product_Loop extends Woomizer_Setting {
 			'woomizer_products_loop_add_to_cart_btn_text_simple',
 			array(
 				'label'   => __( 'Simple Product', 'woomizer' ),
-				'section' => 'woomizer_section_products_loop',
+				'section' => $this->get_section_id(),
 			)
 		);
 
@@ -92,7 +80,7 @@ class Woomizer_Section_Product_Loop extends Woomizer_Setting {
 			'woomizer_products_loop_add_to_cart_btn_text_variable',
 			array(
 				'label'   => __( 'Variable Product', 'woomizer' ),
-				'section' => 'woomizer_section_products_loop',
+				'section' => $this->get_section_id(),
 			)
 		);
 
@@ -109,7 +97,7 @@ class Woomizer_Section_Product_Loop extends Woomizer_Setting {
 			'woomizer_products_loop_add_to_cart_btn_text_grouped',
 			array(
 				'label'   => __( 'Grouped Product', 'woomizer' ),
-				'section' => 'woomizer_section_products_loop',
+				'section' => $this->get_section_id(),
 			)
 		);
 	}
