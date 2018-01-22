@@ -36,68 +36,64 @@ class Woomizer_Section_Product_Loop extends Woomizer_Section {
 	protected function add_settings() {
 
 		// Adding setting for woomizer_product_loop_add_to_cart_btn_text.
-		$this->wp_customize->add_setting(
-			'woomizer_product_loop_add_to_cart_btn_text'
+		$this->add_setting(
+			'product_loop_add_to_cart_btn_text'
 		);
-		$this->wp_customize->add_control(
+		$this->add_control(
 			new Woomizer_Control_Divider(
 				$this->wp_customize,
-				'woomizer_product_loop_add_to_cart_btn_text',
+				'product_loop_add_to_cart_btn_text',
 				array(
 					'label'   => 'Add to Cart Button Text',
-					'section' => $this->get_section_id(),
 				)
 			)
 		);
 
 		// Adding setting for woomizer_product_loop_add_to_cart_btn_text_simple.
-		$this->wp_customize->add_setting(
-			'woomizer_product_loop_add_to_cart_btn_text_simple',
+		$this->add_setting(
+			'product_loop_add_to_cart_btn_text_simple',
 			array(
 				'default'   => __( 'Add to Cart', 'woomizer' ),
 				'transport' => 'postMessage',
 				'type'      => 'theme_mod',
 			)
 		);
-		$this->wp_customize->add_control(
-			'woomizer_product_loop_add_to_cart_btn_text_simple',
+		$this->add_control(
+			'product_loop_add_to_cart_btn_text_simple',
 			array(
-				'label'   => __( 'Simple Product', 'woomizer' ),
-				'section' => $this->get_section_id(),
+				'label' => __( 'Simple Product', 'woomizer' ),
 			)
 		);
 
 		// Adding setting for woomizer_product_loop_add_to_cart_btn_text_variable.
-		$this->wp_customize->add_setting(
-			'woomizer_product_loop_add_to_cart_btn_text_variable',
+		$this->add_setting(
+			'product_loop_add_to_cart_btn_text_variable',
 			array(
 				'default'   => __( 'Select options', 'woomizer' ),
 				'transport' => 'postMessage',
 				'type'      => 'theme_mod',
 			)
 		);
-		$this->wp_customize->add_control(
-			'woomizer_product_loop_add_to_cart_btn_text_variable',
+		$this->add_control(
+			'product_loop_add_to_cart_btn_text_variable',
 			array(
 				'label'   => __( 'Variable Product', 'woomizer' ),
-				'section' => $this->get_section_id(),
 			)
 		);
 
 		// Adding setting for woomizer_product_loop_add_to_cart_btn_text_grouped.
-		$this->wp_customize->add_setting(
-			'woomizer_product_loop_add_to_cart_btn_text_grouped',
+		$this->add_setting(
+			'product_loop_add_to_cart_btn_text_grouped',
 			array(
 				'default'   => __( 'View products', 'woomizer' ),
 				'transport' => 'postMessage',
 				'type'      => 'theme_mod',
 			)
 		);
-		$this->wp_customize->add_control(
-			'woomizer_product_loop_add_to_cart_btn_text_grouped',
+		$this->add_control(
+			'product_loop_add_to_cart_btn_text_grouped',
 			array(
 				'label'   => __( 'Grouped Product', 'woomizer' ),
-				'section' => $this->get_section_id(),
 			)
 		);
 	}
