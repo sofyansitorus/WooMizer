@@ -50,5 +50,24 @@ class Woomizer_Section_Checkout extends Woomizer_Section {
 				'label' => __( 'Submit Order button', 'woomizer' ),
 			)
 		);
+		$this->add_partial(
+			'checkout_submit_order_button_text',
+			array(
+				'selector'            => 'form.woocommerce-checkout',
+				'container_inclusive' => true,
+				'render_callback'     => array( $this, 'render_callback_checkout_submit_order_button_text' ),
+			)
+		);
+
+	}
+
+	/**
+	 * Render callback for partial refresh setting: woomizer_checkout_submit_order_button_text.
+	 *
+	 * @since 1.1.0
+	 */
+	public function render_callback_checkout_submit_order_button_text() {
+		$checkout = WC()->checkout();
+		wc_get_template( 'checkout/form-checkout.php', array( 'checkout' => $checkout ) );
 	}
 }
