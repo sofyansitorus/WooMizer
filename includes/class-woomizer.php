@@ -2,11 +2,8 @@
 /**
  * The file that defines the core plugin class
  *
- * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
- *
  * @link       https://github.com/sofyansitorus
- * @since      1.0.0
+ * @since      1.1.0
  *
  * @package    Woomizer
  * @subpackage Woomizer/includes
@@ -15,20 +12,15 @@
 /**
  * The core plugin class.
  *
- * This is used to define internationalization, admin-specific hooks, and
- * public-facing site hooks.
- *
- * Also maintains the unique identifier of this plugin as well as the current
- * version of the plugin.
- *
- * @since      1.0.0
+ * @since      1.1.0
  * @package    Woomizer
  * @subpackage Woomizer/includes
  * @author     Sofyan Sitorus <sofyansitorus@gmail.com>
  */
-class Woomizer {
+final class Woomizer {
+
 	/**
-	 * Class instance
+	 * Hold an instance of the class
 	 *
 	 * @since    1.1.0
 	 * @var \Woomizer
@@ -36,9 +28,22 @@ class Woomizer {
 	private static $_instance = null;
 
 	/**
+	 * Call this method to get singleton
+	 *
+	 * @since    1.1.0
+	 * @return Woomizer
+	 */
+	public static function init() {
+		if ( is_null( self::$_instance ) ) {
+			self::$_instance = new self();
+		}
+		return self::$_instance;
+	}
+
+	/**
 	 * Constructor for your shipping class
 	 *
-	 * @since    1.0.0
+	 * @since    1.1.0
 	 */
 	private function __construct() {
 
@@ -46,7 +51,11 @@ class Woomizer {
 
 		// Setup the Theme Customizer settings and controls.
 		add_action( 'customize_register', array( $this, 'register' ), 99 );
+
+		// Enqueue live preview scripts and styles.
 		add_action( 'customize_preview_init', array( $this, 'customize_preview_init' ), 99 );
+
+		// Enqueue front scripts and styles.
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 99 );
 
 		// Filter settings arguments.
@@ -67,21 +76,9 @@ class Woomizer {
 	}
 
 	/**
-	 * Get Instance
-	 *
-	 * @since    1.1.0
-	 */
-	public static function init() {
-		if ( is_null( self::$_instance ) ) {
-			self::$_instance = new self();
-		}
-		return self::$_instance;
-	}
-
-	/**
 	 * Load plugin textdomain.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function load_plugin_textdomain() {
 		load_plugin_textdomain( 'woomizer', false, basename( WOOMIZER_PATH ) . '/languages' );
@@ -91,7 +88,7 @@ class Woomizer {
 	 * This hooks into 'customize_register' (available as of WP 3.4) and allows
 	 * you to add new sections and controls to the Theme Customize screen.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 * @param \WP_Customize_Manager $wp_customize Customize manager class.
 	 */
 	public function register( $wp_customize ) {
@@ -156,7 +153,7 @@ class Woomizer {
 	 * Used by hook: 'customize_preview_init'
 	 *
 	 * @see add_action('customize_preview_init',$func)
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function customize_preview_init() {
 
@@ -197,19 +194,13 @@ class Woomizer {
 	}
 
 	/**
-	 * This outputs the javascript needed to automate the live settings preview.
-	 * Also keep in mind that this function isn't necessary unless your settings
-	 * are using 'transport'=>'postMessage' instead of the default 'transport'
-	 * => 'refresh'
+	 * Enqueue front scripts and styles.
 	 *
-	 * Used by hook: 'customize_preview_init'
-	 *
-	 * @see add_action('customize_preview_init',$func)
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
-	public static function enqueue_scripts() {
+	public function enqueue_scripts() {
 
-		// DIsable if customizer preview.
+		// Disable if customizer preview.
 		if ( is_customize_preview() ) {
 			return;
 		}
@@ -244,31 +235,31 @@ class Woomizer {
 			'woomizer_params',
 			array(
 				'prefix'          => WOOMIZER_PREFIX,
-				'toggle_elements' => $this->get_toggle_elements(),
+				'toggle_elements' => array(
+					'cart_display_cross_sells' => array(
+						'selector' => '.cart-collaterals .cross-sells',
+						'value'    => get_theme_mod( 'woomizer_cart_display_cross_sells' ),
+					),
+				),
 			)
 		);
-
 	}
 
 	/**
-	 * This outputs the javascript needed to automate the live settings preview.
-	 * Also keep in mind that this function isn't necessary unless your settings
-	 * are using 'transport'=>'postMessage' instead of the default 'transport'
-	 * => 'refresh'
+	 * Filter the customizer dynamic settings.
 	 *
-	 * Used by hook: 'customize_preview_init'
-	 *
-	 * @see add_action('customize_preview_init',$func)
 	 * @since 1.1.0
+	 * @param array  $args Customiser setting arguments.
+	 * @param string $id Customiser setting ID.
+	 * @return array
 	 */
-	public static function get_toggle_elements() {
-		return array(
-			'cart_display_cross_sells' => array(
-				'selector' => '.cart-collaterals .cross-sells',
-				'value'    => get_theme_mod( 'woomizer_cart_display_cross_sells' ),
-			),
-		);
+	public function dynamic_setting_args( $args, $id ) {
+		if ( 0 === strpos( $id, WOOMIZER_PREFIX ) && isset( $args['default'] ) && is_array( $args['default'] ) ) {
+			$args['default'] = wp_json_encode( $args['default'] );
+		}
+		return $args;
 	}
+
 	/**
 	 * Filter the default product tabs.
 	 *
@@ -376,20 +367,5 @@ class Woomizer {
 	public function global_sale_flash( $text ) {
 		$custom_text = get_theme_mod( 'woomizer_global_flash_sale_text' );
 		return '<span class="onsale">' . esc_html( $custom_text ) . '</span>';
-	}
-
-	/**
-	 * Filter the settings arguments for woomizer_product_single_tabs.
-	 *
-	 * @since 1.1.0
-	 * @param array  $args Customiser setting arguments.
-	 * @param string $id Customiser setting ID.
-	 * @return array
-	 */
-	public function dynamic_setting_args( $args, $id ) {
-		if ( 'woomizer_product_single_tabs' === $id && isset( $args['default'] ) && is_array( $args['default'] ) ) {
-			$args['default'] = wp_json_encode( $args['default'] );
-		}
-		return $args;
 	}
 }
