@@ -10,6 +10,7 @@
   "description": "WooCommerce customizer with live preview.",
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.1.0",
     "gulp-clean-css": "3.9.0",
     "gulp-header": "1.8.9",
     "gulp-rename": "^1.2.2",
