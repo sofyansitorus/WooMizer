@@ -49,7 +49,6 @@ class Woomizer_Section_Global extends Woomizer_Section {
 			'global_flash_sale_text',
 			array(
 				'label'   => __( 'Flash sale text', 'woomizer' ),
-				'section' => $this->get_section_id(),
 			)
 		);
 	}
