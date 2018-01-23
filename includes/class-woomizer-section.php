@@ -155,18 +155,27 @@ class Woomizer_Section extends Woomizer_Setting {
 
 		// Handle if $setting is instance of WP_Customize_Setting.
 		if ( $setting instanceof WP_Customize_Setting ) {
-
 			if ( $setting->id !== $this->autoprefix( $setting->id ) ) {
-
-				$id = $this->autoprefix( $setting->id );
-
-				$vars = get_class_vars( get_class( $setting ) );
-
-				// Add the customizer setting.
-				$this->wp_customize->add_setting( $id, $vars );
 
 				// Remove invalid ID customizer setting.
 				$this->wp_customize->remove_setting( $setting->id );
+
+				$id = $this->autoprefix( $setting->id );
+
+				$args = array();
+
+				$keys = array_keys( get_class_vars( get_class( $setting ) ) );
+
+				foreach ( $keys as $key ) {
+					$args[ $key ] = $setting->{$key};
+				}
+
+				$class = get_class( $setting );
+
+				$setting = new $class( $this->wp_customize, $id, $args );
+
+				// Add the customizer setting.
+				$this->wp_customize->add_setting( $setting );
 
 				return;
 			}
