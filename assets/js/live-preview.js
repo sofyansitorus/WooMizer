@@ -57,6 +57,11 @@
 	// Customizer live preview: woomizer_product_single_tabs
 	wp.customize('woomizer_product_single_tabs', function (setting) {
 		wp.customize.selectiveRefresh.bind('partial-content-rendered', function (placement) {
+			$(document).on('init', '#rating', function () {
+				if ($('.comment-form-rating').find('p.stars').length > 1) {
+					$('.comment-form-rating').find('p.stars:not(first-child)').last().remove();
+				}
+			});
 			$('.wc-tabs-wrapper, .woocommerce-tabs, #rating').trigger('init');
 		});
 	});
