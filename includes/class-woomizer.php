@@ -72,6 +72,9 @@ final class Woomizer {
 
 		// Filter add to cart button text for product loop.
 		add_filter( 'woocommerce_sale_flash', array( $this, 'global_sale_flash' ), 99 );
+
+		// Filter submit order button text.
+		add_filter( 'woocommerce_order_button_text', array( $this, 'order_button_text' ), 99 );
 	}
 
 	/**
@@ -382,5 +385,20 @@ final class Woomizer {
 			return $text;
 		}
 		return '<span class="onsale">' . esc_html( $custom_text ) . '</span>';
+	}
+
+	/**
+	 * Filter submit order button text.
+	 *
+	 * @since 1.1.0
+	 * @param string $text Current order button text.
+	 * @return string
+	 */
+	public function order_button_text( $text ) {
+		$custom_text = get_theme_mod( 'woomizer_checkout_submit_order_button_text' );
+		if ( empty( $custom_text ) ) {
+			return $text;
+		}
+		return $custom_text;
 	}
 }
