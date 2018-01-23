@@ -32,12 +32,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Defines plugin named constants.
-define( 'WOOMIZER_PATH', plugin_dir_path( __FILE__ ) );
-define( 'WOOMIZER_URL', plugin_dir_url( __FILE__ ) );
-define( 'WOOMIZER_VERSION', '1.0.0' );
-define( 'WOOMIZER_PREFIX', 'woomizer' );
-
 /**
  * Check if WooCommerce is active
  */
@@ -46,6 +40,19 @@ if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins',
 }// End if().
 
 if ( ! function_exists( 'woomizer_init' ) ) {
+
+	// Defines plugin named constants.
+	define( 'WOOMIZER_PATH', plugin_dir_path( __FILE__ ) );
+	define( 'WOOMIZER_URL', plugin_dir_url( __FILE__ ) );
+	define( 'WOOMIZER_VERSION', '1.0.0' );
+	define( 'WOOMIZER_PREFIX', 'woomizer' );
+
+	// Include the dependencies.
+	require_once WOOMIZER_PATH . 'includes/class-woomizer-setting.php';
+	require_once WOOMIZER_PATH . 'includes/class-woomizer-panel.php';
+	require_once WOOMIZER_PATH . 'includes/class-woomizer-section.php';
+	require_once WOOMIZER_PATH . 'includes/class-woomizer.php';
+
 	/**
 	 * Initialize the Woomizer class.
 	 *
@@ -53,11 +60,6 @@ if ( ! function_exists( 'woomizer_init' ) ) {
 	 * @return void
 	 */
 	function woomizer_init() {
-		// Include the dependencies.
-		require_once WOOMIZER_PATH . 'includes/class-woomizer.php';
-        require_once WOOMIZER_PATH . 'includes/class-woomizer-setting.php';
-        require_once WOOMIZER_PATH . 'includes/class-woomizer-panel.php';
-        require_once WOOMIZER_PATH . 'includes/class-woomizer-section.php';
 
 		// Initialize main class.
 		Woomizer::init();
