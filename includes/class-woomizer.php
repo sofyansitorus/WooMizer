@@ -72,7 +72,6 @@ final class Woomizer {
 
 		// Filter add to cart button text for product loop.
 		add_filter( 'woocommerce_sale_flash', array( $this, 'global_sale_flash' ), 99 );
-
 	}
 
 	/**
@@ -141,7 +140,6 @@ final class Woomizer {
 				'title' => __( 'Cart', 'woomizer' ),
 			)
 		);
-
 	}
 
 	/**
@@ -190,7 +188,6 @@ final class Woomizer {
 				'cart_page_id' => get_option( 'woocommerce_cart_page_id', '0' ),
 			)
 		);
-
 	}
 
 	/**
@@ -278,8 +275,15 @@ final class Woomizer {
 
 		$options = get_theme_mod( 'woomizer_product_single_tabs', array() );
 
-		if ( ! is_array( $options ) ) {
+		if ( $options && ! is_array( $options ) ) {
 			$options = json_decode( $options, true );
+			if ( json_last_error() !== JSON_ERROR_NONE ) {
+				return $tabs;
+			}
+		}
+
+		if ( ! $options || ! is_array( $options ) ) {
+			return $tabs;
 		}
 
 		foreach ( $tab_keys as $tab_key ) {
@@ -315,10 +319,10 @@ final class Woomizer {
 	 */
 	public function single_add_to_cart_btn_text( $text, $product ) {
 		$custom_text = get_theme_mod( 'woomizer_product_single_add_to_cart_btn_text' );
-		if ( ! empty( $custom_text ) ) {
-			return $custom_text;
+		if ( empty( $custom_text ) ) {
+			return $text;
 		}
-		return $text;
+		return $custom_text;
 	}
 
 	/**
@@ -330,30 +334,28 @@ final class Woomizer {
 	 * @return string
 	 */
 	public function loop_add_to_cart_btn_text( $text, $product ) {
+
+		$custom_text = get_theme_mod( 'woomizer_product_loop_add_to_cart_btn_text_' . $product->get_type() );
+
+		if ( empty( $custom_text ) ) {
+			return $text;
+		}
+
 		switch ( $product->get_type() ) {
-			case 'external':
-				return $text;
-				break;
 			case 'simple':
-				$custom_text = get_theme_mod( 'woomizer_product_loop_add_to_cart_btn_text_simple' );
-				if ( ! empty( $custom_text ) && $product->is_purchasable() && $product->is_in_stock() ) {
-					return $custom_text;
+				if ( $product->is_purchasable() && $product->is_in_stock() ) {
+					$text = $custom_text;
 				}
 				break;
 			case 'variable':
-				$custom_text = get_theme_mod( 'woomizer_product_loop_add_to_cart_btn_text_variable' );
-				if ( ! empty( $custom_text ) && $product->is_purchasable() ) {
-					return $custom_text;
+				if ( $product->is_purchasable() ) {
+					$text = $custom_text;
 				}
 				break;
 			case 'grouped':
-				$custom_text = get_theme_mod( 'woomizer_product_loop_add_to_cart_btn_text_grouped' );
-				if ( ! empty( $custom_text ) ) {
-					return $custom_text;
-				}
+				$text = $custom_text;
 				break;
 		}
-
 		return $text;
 	}
 
@@ -366,6 +368,9 @@ final class Woomizer {
 	 */
 	public function global_sale_flash( $text ) {
 		$custom_text = get_theme_mod( 'woomizer_global_flash_sale_text' );
+		if ( empty( $custom_text ) ) {
+			return $text;
+		}
 		return '<span class="onsale">' . esc_html( $custom_text ) . '</span>';
 	}
 }
