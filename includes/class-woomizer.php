@@ -140,6 +140,16 @@ final class Woomizer {
 				'title' => __( 'Cart', 'woomizer' ),
 			)
 		);
+
+		// Register customizer settings section: woomizer_section_checkout.
+		$section_product_loop = new Woomizer_Section_Checkout(
+			$wp_customize,
+			'section_checkout',
+			array(
+				'title' => __( 'Checkout', 'woomizer' ),
+			)
+		);
+
 	}
 
 	/**
