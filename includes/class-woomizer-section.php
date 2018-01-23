@@ -28,6 +28,7 @@
  */
 class Woomizer_Section extends Woomizer_Setting {
 
+
 	/**
 	 * WP_Customize_Manager object.
 	 *
@@ -137,7 +138,8 @@ class Woomizer_Section extends Woomizer_Setting {
 	 *
 	 * @since 1.1.0
 	 */
-	protected function init_settings() {}
+	protected function init_settings() {
+	}
 
 	/**
 	 * Wrap \WP_Customize_Manager::add_setting method for id autoprefix.
@@ -214,7 +216,6 @@ class Woomizer_Section extends Woomizer_Setting {
 
 		// Handle if $control is instance of WP_Customize_Control.
 		if ( $control instanceof WP_Customize_Control ) {
-
 			if ( $control->id !== $this->autoprefix( $control->id ) ) {
 
 				// Remove invalid ID customizer control.
@@ -272,7 +273,6 @@ class Woomizer_Section extends Woomizer_Setting {
 
 		// Add the customizer control.
 		$this->wp_customize->add_control( $control, $args );
-
 	}
 
 	/**
@@ -287,21 +287,49 @@ class Woomizer_Section extends Woomizer_Setting {
 			return;
 		}
 
-		$customize_partial_id = $passed_args[0];
+		$partial = $passed_args[0];
 
-		$customize_partial_args = ( isset( $passed_args[1] ) && is_array( $passed_args[1] ) ) ? $passed_args[1] : array();
+		if ( $partial instanceof WP_Customize_Partial ) {
 
-		if ( $customize_partial_id instanceof WP_Customize_Partial && $customize_partial_id->id !== $this->autoprefix( $customize_partial_id->id ) ) {
-			$id   = $this->autoprefix( $customize_partial_id->id );
-			$args = get_object_vars( $customize_partial_id );
-			$this->wp_customize->selective_refresh->add_partial( $id, $args );
+			// Check if ID is prefixed and matched.
+			if ( $partial->id !== $this->autoprefix( $partial->id ) ) {
+				// Remove unused partial.
+				$this->wp_customize->selective_refresh->remove_partial( $partial->id );
+
+				$id = $this->autoprefix( $partial->id );
+
+				$args = array();
+
+				$keys = array_keys( get_class_vars( get_class( $partial ) ) );
+
+				foreach ( $keys as $key ) {
+					$args[ $key ] = $partial->{$key};
+				}
+
+				$class = get_class( $partial );
+
+				$partial = new $class( $this->wp_customize, $id, $args );
+
+				// Add the customizer partial.
+				$this->wp_customize->selective_refresh->add_partial( $partial );
+				return;
+			}
+
+			// Add the customizer partial.
+			$this->wp_customize->selective_refresh->add_partial( $partial );
 			return;
 		}
 
-		if ( ! $customize_partial_id instanceof WP_Customize_Partial ) {
-			$customize_partial_id = $this->autoprefix( $customize_partial_id );
-			$this->wp_customize->selective_refresh->add_partial( $customize_partial_id, $customize_partial_args );
+		// Check if $partial is string.
+		if ( ! is_string( $partial ) ) {
+			return;
 		}
-	}
 
+		$args = ( isset( $passed_args[1] ) && is_array( $passed_args[1] ) ) ? $passed_args[1] : array();
+
+		// Modify value for WP_Customize_Control::id.
+		$partial = $this->autoprefix( $partial );
+
+		$this->wp_customize->selective_refresh->add_partial( $partial, $args );
+	}
 }
