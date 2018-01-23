@@ -15,13 +15,10 @@
         },
 
         _toggleElement: function (value, $selector) {
-            $selector.addClass('woomizer-toggle');
             if (value == 'no' || value == 'none' || value == 'hidden') {
-                $selector.addClass('woomizer-hidden');
-                $selector.removeClass('woomizer-visible');
+                $selector.addClass('woomizer-toggle-hidden');
             } else {
-                $selector.addClass('woomizer-visible');
-                $selector.removeClass('woomizer-hidden');
+                $selector.removeClass('woomizer-toggle-hidden');
             }
         },
 
