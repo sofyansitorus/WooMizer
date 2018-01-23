@@ -1,29 +1,20 @@
 <?php
 /**
- * The file that defines the core plugin class
- *
- * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
+ * Custom WordPress Customize Control classes for product tabs
  *
  * @link       https://github.com/sofyansitorus
  * @since      1.0.0
  *
  * @package    Woomizer
- * @subpackage Woomizer/include/controls
+ * @subpackage Woomizer/includes/controls
  */
 
 /**
- * The core plugin class.
- *
- * This is used to define internationalization, admin-specific hooks, and
- * public-facing site hooks.
- *
- * Also maintains the unique identifier of this plugin as well as the current
- * version of the plugin.
+ * Woomizer_Control_Product_Tabs classes
  *
  * @since      1.0.0
  * @package    Woomizer
- * @subpackage Woomizer/include/controls
+ * @subpackage Woomizer/includes/controls
  * @author     Sofyan Sitorus <sofyansitorus@gmail.com>
  */
 class Woomizer_Control_Product_Tabs extends WP_Customize_Control {
