@@ -17,14 +17,24 @@ WooCommerce customizer with live preview.
 
 * Customize add to cart button text for products loop.
 * Customize add to cart button text for product single.
+* Customize flash sale text.
+* Customize submit order button text.
 * Customize product tabs title.
 * Hide product tabs.
+* Hide cross sell product in cart page.
 
 == Installation ==
 = Minimum Requirements =
 
 * WordPress 4.8 or later
 * WooCommerce 3.0 or later
+
+= AUTOMATIC INSTALLATION =
+
+Automatic installation is the easiest option as WordPress handles the file transfers itself and you don’t even need to leave your web browser. To do an automatic install of Woomizer, log in to your WordPress admin panel, navigate to the Plugins menu and click Add New.
+
+In the search field type “Woomizer” and click Search Plugins. You can install it by simply clicking Install Now. After clicking that link you will be asked if you’re sure you want to install the plugin. Click yes and WordPress will automatically complete the installation. After installation has finished, click the ‘activate plugin’ link.
+
 
 = MANUAL INSTALLATION =
 
@@ -53,9 +63,21 @@ You can create ticket at GitHub repository:
 
 == Changelog ==
 
+= 1.1.0 - 2018-01-24 =
+
+* Feature - Add new setting section for cart page.
+* Feature - Add new setting section for checkout page.
+* Optimizations - Refactor PHP and JS as modular.
+* Fix - Bug for product tabs live preview.
+
 = 1.0.0 - 2018-01-18 =
 
 * Feature - Customize add to cart button text for products loop.
 * Feature - Customize add to cart button text for product single.
 * Feature - Customize product tabs title.
 * Feature - Hide product tabs.
+
+== Upgrade Notice ==
+
+= 1.1.0 =
+This version add some improvements. Upgrade immediately.
