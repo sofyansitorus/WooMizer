@@ -82,8 +82,9 @@ class Woomizer_Section_Product_Single extends Woomizer_Section {
 		$this->add_partial(
 			'product_single_tabs',
 			array(
-				'selector'        => '.woocommerce-tabs.wc-tabs-wrapper',
-				'render_callback' => array( $this, 'render_callback_product_single_tabs' ),
+				'selector'            => '.woocommerce-tabs.wc-tabs-wrapper',
+				'container_inclusive' => true,
+				'render_callback'     => array( $this, 'render_callback_product_single_tabs' ),
 			)
 		);
 	}
