@@ -151,19 +151,42 @@ class Woomizer_Section extends Woomizer_Setting {
 			return;
 		}
 
-		$setting_id = $passed_args[0];
+		$setting = $passed_args[0];
 
-		$setting_args = ( isset( $passed_args[1] ) && is_array( $passed_args[1] ) ) ? $passed_args[1] : array();
+		// Handle if $setting is instance of WP_Customize_Setting.
+		if ( $setting instanceof WP_Customize_Setting ) {
 
-		if ( $setting_id instanceof WP_Customize_Setting ) {
-			$setting_id->id = $this->autoprefix( $setting_id->id );
+			if ( $setting->id !== $this->autoprefix( $setting->id ) ) {
+
+				$id = $this->autoprefix( $setting->id );
+
+				$vars = get_class_vars( get_class( $setting ) );
+
+				// Add the customizer setting.
+				$this->wp_customize->add_setting( $id, $vars );
+
+				// Remove invalid ID customizer setting.
+				$this->wp_customize->remove_setting( $setting->id );
+
+				return;
+			}
+
+			// Add the customizer setting.
+			$this->wp_customize->add_setting( $setting );
+			return;
 		}
 
-		if ( ! $setting_id instanceof WP_Customize_Setting ) {
-			$setting_id = $this->autoprefix( $setting_id );
+		// Check if $setting is string.
+		if ( ! is_string( $setting ) ) {
+			return;
 		}
 
-		$this->wp_customize->add_setting( $setting_id, $setting_args );
+		$args = ( isset( $passed_args[1] ) && is_array( $passed_args[1] ) ) ? $passed_args[1] : array();
+
+		$setting = $this->autoprefix( $setting );
+
+		// Add the customizer setting.
+		$this->wp_customize->add_setting( $setting, $args );
 	}
 
 	/**
