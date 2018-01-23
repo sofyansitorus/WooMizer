@@ -31,11 +31,6 @@
 			self._bindToggleElement('cart_display_cross_sells', $('.cart-collaterals .cross-sells'));
 			self._bindCustomCallback('product_single_tabs', function (setting, settingId) {
 				self.api.selectiveRefresh.bind('partial-content-rendered', function (placement) {
-					$(document).on('init', '#rating', function () {
-						if ($('.comment-form-rating').find('p.stars').length > 1) {
-							$('.comment-form-rating').find("p.stars:not(first-child)").remove();
-						}
-					});
 					$('.wc-tabs-wrapper, .woocommerce-tabs, #rating').trigger('init');
 				});
 			});
