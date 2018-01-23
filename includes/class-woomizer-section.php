@@ -178,57 +178,63 @@ class Woomizer_Section extends Woomizer_Setting {
 			return;
 		}
 
-		$control_id = $passed_args[0];
+		$control = $passed_args[0];
 
-		$control_args = ( isset( $passed_args[1] ) && is_array( $passed_args[1] ) ) ? $passed_args[1] : array();
-
-		// Handle if $control_id is instance of WP_Customize_Control.
-		if ( $control_id instanceof WP_Customize_Control ) {
+		// Handle if $control is instance of WP_Customize_Control.
+		if ( $control instanceof WP_Customize_Control ) {
 
 			// Modify value for WP_Customize_Control::id.
-			$control_id->id = $this->autoprefix( $control_id->id );
+			$control->id = $this->autoprefix( $control->id );
 
 			// Modify value for WP_Customize_Control::settings.
 			$settings = array();
-			foreach ( $control_id->settings as $key => $setting ) {
+			foreach ( $control->settings as $key => $setting ) {
 				if ( ! empty( $setting ) ) {
 					$settings[ $key ] = $setting;
 					continue;
 				}
 				switch ( $key ) {
 					case 'default':
-						$settings[ $key ] = $control_id->manager->get_setting( $control_id->id );
+						$settings[ $key ] = $control->manager->get_setting( $control->id );
 						break;
 
 					default:
-						$settings[ $this->autoprefix( $key ) ] = $control_id->manager->get_setting( $this->autoprefix( $key ) );
+						$settings[ $this->autoprefix( $key ) ] = $control->manager->get_setting( $this->autoprefix( $key ) );
 						break;
 				}
 			}
-			$control_id->settings = $settings;
+			$control->settings = $settings;
 
 			// Modify value for WP_Customize_Control::section.
-			if ( empty( $control_id->section ) ) {
-				$control_id->section = $this->get_section_id();
+			if ( empty( $control->section ) ) {
+				$control->section = $this->get_section_id();
 			}
-			$control_id->section = $this->autoprefix( $control_id->section );
-			$this->wp_customize->add_control( $control_id, $control_args );
+			$control->section = $this->autoprefix( $control->section );
+
+			// Add the customizer control.
+			$this->wp_customize->add_control( $control );
 			return;
 		}
 
-		// Handle if $control_id is not instance of WP_Customize_Control.
-		if ( ! $control_id instanceof WP_Customize_Control ) {
-			// Modify value for WP_Customize_Control::id.
-			$control_id = $this->autoprefix( $control_id );
-
-			// Modify value for WP_Customize_Control::section.
-			if ( empty( $control_args['section'] ) ) {
-				$control_args['section'] = $this->get_section_id();
-			}
-			$control_args['section'] = $this->autoprefix( $control_args['section'] );
-			$this->wp_customize->add_control( $control_id, $control_args );
+		// Check if $control is string.
+		if ( ! is_string( $control ) ) {
 			return;
 		}
+
+		$args = ( isset( $passed_args[1] ) && is_array( $passed_args[1] ) ) ? $passed_args[1] : array();
+
+		// Modify value for WP_Customize_Control::id.
+		$control = $this->autoprefix( $control );
+
+		// Modify value for WP_Customize_Control::section.
+		if ( empty( $args['section'] ) ) {
+			$args['section'] = $this->get_section_id();
+		}
+		$args['section'] = $this->autoprefix( $args['section'] );
+
+		// Add the customizer control.
+		$this->wp_customize->add_control( $control, $args );
+
 	}
 
 	/**
