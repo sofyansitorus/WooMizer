@@ -220,24 +220,27 @@ class Woomizer_Section extends Woomizer_Setting {
 				// Remove invalid ID customizer control.
 				$this->wp_customize->remove_control( $control->id );
 
-				$id = $this->autoprefix( $control->id );
+				// Modify value for WP_Customize_Control::id.
+				$control->id = $this->autoprefix( $control->id );
 
-				$args = get_class_vars( get_class( $control ) );
+				// Modify value for WP_Customize_Control::settings.
+				$settings = array();
+				foreach ( $control->settings as $key => $setting ) {
+					if ( ! empty( $setting ) ) {
+						$settings[ $key ] = $setting;
+						continue;
+					}
+					switch ( $key ) {
+						case 'default':
+							$settings[ $key ] = $control->manager->get_setting( $control->id );
+							break;
 
-				// Modify value for WP_Customize_Control::section.
-				if ( empty( $args['section'] ) ) {
-					$args['section'] = $this->get_section_id();
+						default:
+							$settings[ $this->autoprefix( $key ) ] = $control->manager->get_setting( $this->autoprefix( $key ) );
+							break;
+					}
 				}
-				$args['section'] = $this->autoprefix( $args['section'] );
-
-				$class = get_class( $control );
-
-				$control = new $class( $this->wp_customize, $id, $args );
-
-				// Add the customizer control.
-				$this->wp_customize->add_control( $control );
-
-				return;
+				$control->settings = $settings;
 			}
 
 			// Modify value for WP_Customize_Control::section.
