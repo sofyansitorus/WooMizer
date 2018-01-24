@@ -111,7 +111,6 @@ final class Woomizer {
 		return $links;
 	}
 
-
 	/**
 	 * This hooks into 'customize_register' (available as of WP 3.4) and allows
 	 * you to add new sections and controls to the Theme Customize screen.
@@ -133,15 +132,6 @@ final class Woomizer {
 
 		// Register customizer settings panel.
 		$panel = new Woomizer_Panel( $wp_customize );
-
-		// Register customizer settings section: woomizer_section_global.
-		$section_product_loop = new Woomizer_Section_Global(
-			$wp_customize,
-			'section_global',
-			array(
-				'title' => __( 'Global', 'woomizer' ),
-			)
-		);
 
 		// Register customizer settings section: woomizer_section_product_loop.
 		$section_product_loop = new Woomizer_Section_Product_Loop(
