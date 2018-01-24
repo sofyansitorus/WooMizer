@@ -42,8 +42,9 @@ if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins',
 if ( ! function_exists( 'woomizer_init' ) ) {
 
 	// Defines plugin named constants.
-	define( 'WOOMIZER_PATH', plugin_dir_path( __FILE__ ) );
-	define( 'WOOMIZER_URL', plugin_dir_url( __FILE__ ) );
+	define( 'WOOMIZER_FILE', __FILE__ );
+	define( 'WOOMIZER_PATH', plugin_dir_path( WOOMIZER_FILE ) );
+	define( 'WOOMIZER_URL', plugin_dir_url( WOOMIZER_FILE ) );
 	define( 'WOOMIZER_VERSION', '1.1.0' );
 	define( 'WOOMIZER_PREFIX', 'woomizer' );
 
