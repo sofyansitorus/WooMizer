@@ -46,8 +46,11 @@ final class Woomizer {
 	 * @since    1.1.0
 	 */
 	private function __construct() {
-
+		// Load plugin textdomain.
 		add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain' ) );
+
+		// Filter to add plugin action links.
+		add_action( 'plugin_action_links_' . plugin_basename( WOOMIZER_FILE ), array( $this, 'plugin_action_links' ), 99, 2 );
 
 		// Setup the Theme Customizer settings and controls.
 		add_action( 'customize_register', array( $this, 'register' ), 99 );
@@ -75,8 +78,6 @@ final class Woomizer {
 
 		// Filter submit order button text.
 		add_filter( 'woocommerce_order_button_text', array( $this, 'order_button_text' ), 99 );
-
-		add_action( 'plugin_action_links_' . plugin_basename( WOOMIZER_FILE ), array( $this, 'plugin_action_links' ), 99, 2 );
 
 	}
 
