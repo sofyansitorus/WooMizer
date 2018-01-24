@@ -79,6 +79,11 @@ final class Woomizer {
 		// Filter submit order button text.
 		add_filter( 'woocommerce_order_button_text', array( $this, 'order_button_text' ), 99 );
 
+		// Filter number of products per row.
+		add_filter( 'loop_shop_columns', array( $this, 'loop_columns' ), 99 );
+
+		// Filter number of products per page.
+		add_filter( 'loop_shop_per_page', array( $this, 'loop_shop_per_page' ), 99 );
 	}
 
 	/**
@@ -168,7 +173,6 @@ final class Woomizer {
 				'title' => __( 'Checkout', 'woomizer' ),
 			)
 		);
-
 	}
 
 	/**
@@ -430,4 +434,35 @@ final class Woomizer {
 		}
 		return $custom_text;
 	}
+
+	/**
+	 * Set number of products per row.
+	 *
+	 * @since 1.1.1
+	 * @param int $col Current number of products per row.
+	 * @return int
+	 */
+	public function loop_columns( $col ) {
+		$grids = explode( 'x', get_theme_mod( 'woomizer_product_loop_grid' ) );
+		if ( count( $grids ) === 2 && absint( $grids[0] ) ) {
+			return $grids[0];
+		}
+		return $col;
+	}
+
+	/**
+	 * Set number of products per page.
+	 *
+	 * @since 1.1.1
+	 * @param int $per_page Current number of products per page.
+	 * @return int
+	 */
+	public function loop_shop_per_page( $per_page ) {
+		$grids = explode( 'x', get_theme_mod( 'woomizer_product_loop_grid' ) );
+		if ( count( $grids ) === 2 && absint( $grids[0] ) && absint( $grids[0] ) ) {
+			return $grids[0] * $grids[1];
+		}
+		return $per_page;
+	}
+
 }

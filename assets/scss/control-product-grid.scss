@@ -1,0 +1,37 @@
+.woomizer-product-grid-picker {
+    background: rgba(0, 0, 0, 0.2);
+    position: relative;
+    padding: 2px;
+    width: 100%;
+    box-sizing: border-box;
+    * {
+        box-sizing: border-box;
+    }
+    .product-grid-square {
+        &:first-child {
+            margin-top: 0;
+        }
+        height: 100%;
+        float: left;
+        padding: 1px;
+        &:hover .inner,
+        &.highlight .inner {
+            background: rgba(0, 115, 170, 1);
+        }
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .inner {
+        height: 100%;
+        width: 100%;
+        border-radius: 3px;
+        background: rgba(0, 115, 170, 0.2);
+    }
+}
+
+.woomizer-product-grid-input {
+    &:read-only {
+        background-color: #ffffff;
+    }
+}

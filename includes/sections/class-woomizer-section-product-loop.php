@@ -112,5 +112,23 @@ class Woomizer_Section_Product_Loop extends Woomizer_Section {
 				'label' => __( 'Grouped Product', 'woomizer' ),
 			)
 		);
+
+		// Adding setting for woomizer_product_loop_grid.
+		$this->add_setting(
+			'product_loop_grid',
+			array(
+				'default' => '',
+			)
+		);
+
+		$this->add_control(
+			new Woomizer_Control_Product_Grid(
+				$this->wp_customize,
+				'product_loop_grid',
+				array(
+					'label' => __( 'Products Grid', 'woomizer' ),
+				)
+			)
+		);
 	}
 }
