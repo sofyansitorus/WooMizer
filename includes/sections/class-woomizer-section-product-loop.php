@@ -35,6 +35,22 @@ class Woomizer_Section_Product_Loop extends Woomizer_Section {
 	 */
 	protected function init_settings() {
 
+		// Adding setting for woomizer_product_loop_flash_sale_text.
+		$this->add_setting(
+			'product_loop_flash_sale_text',
+			array(
+				'default'   => __( 'Sale!', 'woomizer' ),
+				'transport' => 'postMessage',
+				'type'      => 'theme_mod',
+			)
+		);
+		$this->add_control(
+			'product_loop_flash_sale_text',
+			array(
+				'label' => __( 'Flash sale text', 'woomizer' ),
+			)
+		);
+
 		// Adding setting for woomizer_product_loop_add_to_cart_btn_text.
 		$this->add_setting(
 			'product_loop_add_to_cart_btn_text'

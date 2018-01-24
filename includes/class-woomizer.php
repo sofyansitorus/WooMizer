@@ -74,7 +74,7 @@ final class Woomizer {
 		add_filter( 'woocommerce_product_add_to_cart_text', array( $this, 'loop_add_to_cart_btn_text' ), 99, 2 );
 
 		// Filter add to cart button text for product loop.
-		add_filter( 'woocommerce_sale_flash', array( $this, 'global_sale_flash' ), 99 );
+		add_filter( 'woocommerce_sale_flash', array( $this, 'sale_flash_text' ), 99 );
 
 		// Filter submit order button text.
 		add_filter( 'woocommerce_order_button_text', array( $this, 'order_button_text' ), 99 );
@@ -405,8 +405,21 @@ final class Woomizer {
 	 * @param string $text Current flash sale text.
 	 * @return string
 	 */
-	public function global_sale_flash( $text ) {
-		$custom_text = get_theme_mod( 'woomizer_global_flash_sale_text' );
+	public function sale_flash_text( $text ) {
+
+		static $is_single_defined = false;
+
+		switch ( true ) {
+			case ! $is_single_defined && is_product() && is_main_query():
+				$is_single_defined = true;
+				$custom_text       = get_theme_mod( 'woomizer_product_single_flash_sale_text' );
+				break;
+
+			default:
+				$custom_text = get_theme_mod( 'woomizer_product_loop_flash_sale_text' );
+				break;
+		}
+
 		if ( empty( $custom_text ) ) {
 			return $text;
 		}

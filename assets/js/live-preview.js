@@ -23,17 +23,23 @@
 
 		_bindSettings: function () {
 			var self = this;
-			self._injectText('global_flash_sale_text', $('.product span.onsale'));
+			// Product loop settings section.
+			self._injectText('product_loop_flash_sale_text', $('.woocommerce-loop-product__link').closest('.product').find('.onsale'));
 			self._injectText('product_loop_add_to_cart_btn_text_simple', $('.product-type-simple .product_type_simple'));
 			self._injectText('product_loop_add_to_cart_btn_text_variable', $('.product-type-variable .product_type_variable'));
 			self._injectText('product_loop_add_to_cart_btn_text_grouped', $('.product-type-grouped .product_type_grouped'));
+			
+			// Product single settings section.
+			self._injectText('product_single_flash_sale_text', $('.woocommerce-product-details__short-description').closest('.product').find('.onsale').first());
 			self._injectText('product_single_add_to_cart_btn_text', $('.single-product .single_add_to_cart_button'));
-			self._toggleElement('woomizer_cart_display_cross_sells', $('.cart-collaterals .cross-sells'));
 			self._customCallback('product_single_tabs', function (setting, settingId) {
 				self.api.selectiveRefresh.bind('partial-content-rendered', function (placement) {
 					$('.wc-tabs-wrapper, .woocommerce-tabs, #rating').trigger('init');
 				});
 			});
+
+			// Cart settings section.
+			self._toggleElement('woomizer_cart_display_cross_sells', $('.cart-collaterals .cross-sells'));
 		},
 
 		_injectText: function (settingId, $selector) {

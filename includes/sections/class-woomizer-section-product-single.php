@@ -35,9 +35,25 @@ class Woomizer_Section_Product_Single extends Woomizer_Section {
 	 */
 	protected function init_settings() {
 
+		// Adding setting for woomizer_product_single_flash_sale_text.
+		$this->add_setting(
+			'product_single_flash_sale_text',
+			array(
+				'default'   => __( 'Sale!', 'woomizer' ),
+				'transport' => 'postMessage',
+				'type'      => 'theme_mod',
+			)
+		);
+		$this->add_control(
+			'product_single_flash_sale_text',
+			array(
+				'label' => __( 'Flash sale text', 'woomizer' ),
+			)
+		);
+
 		// Adding setting for woomizer_product_single_add_to_cart_btn_text.
 		$this->add_setting(
-			'woomizer_product_single_add_to_cart_btn_text',
+			'product_single_add_to_cart_btn_text',
 			array(
 				'default'   => __( 'Add to Cart', 'woomizer' ),
 				'transport' => 'postMessage',
@@ -45,7 +61,7 @@ class Woomizer_Section_Product_Single extends Woomizer_Section {
 			)
 		);
 		$this->add_control(
-			'woomizer_product_single_add_to_cart_btn_text',
+			'product_single_add_to_cart_btn_text',
 			array(
 				'label' => __( 'Add to cart button text', 'woomizer' ),
 			)
