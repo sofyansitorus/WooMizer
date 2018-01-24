@@ -75,6 +75,9 @@ final class Woomizer {
 
 		// Filter submit order button text.
 		add_filter( 'woocommerce_order_button_text', array( $this, 'order_button_text' ), 99 );
+
+		add_action( 'plugin_action_links_' . plugin_basename( WOOMIZER_FILE ), array( $this, 'plugin_action_links' ), 99, 2 );
+
 	}
 
 	/**
@@ -85,6 +88,28 @@ final class Woomizer {
 	public function load_plugin_textdomain() {
 		load_plugin_textdomain( 'woomizer', false, basename( WOOMIZER_PATH ) . '/languages' );
 	}
+
+	/**
+	 * Add plugin action links.
+	 *
+	 * Add a link to the settings page on the plugins.php page.
+	 *
+	 * @since 1.1.1
+	 *
+	 * @param  array $links List of existing plugin action links.
+	 * @return array         List of modified plugin action links.
+	 */
+	public function plugin_action_links( $links ) {
+		$links = array_merge(
+			array(
+				'<a href="' . esc_url( admin_url( 'customize.php' ) ) . '">' . __( 'Customize', 'woomizer' ) . '</a>',
+			),
+			$links
+		);
+
+		return $links;
+	}
+
 
 	/**
 	 * This hooks into 'customize_register' (available as of WP 3.4) and allows
