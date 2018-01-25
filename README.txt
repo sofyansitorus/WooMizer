@@ -20,6 +20,7 @@ WooCommerce customizer with live preview.
 * Customize flash sale text.
 * Customize submit order button text.
 * Customize product tabs title.
+* Customize columns and rows number for product grid.
 * Hide product tabs.
 * Hide cross sell product in cart page.
 
@@ -63,6 +64,11 @@ You can create ticket at GitHub repository:
 
 == Changelog ==
 
+= 1.1.1 - 2018-01-25 =
+
+* Improments - Add new plugin action links.
+* Feature - Add new setting for product grid.
+
 = 1.1.0 - 2018-01-24 =
 
 * Feature - Add new setting section for cart page.
@@ -79,5 +85,5 @@ You can create ticket at GitHub repository:
 
 == Upgrade Notice ==
 
-= 1.1.0 =
-This version add some improvements. Upgrade immediately.
+= 1.1.1 =
+This version add some improvements and new features. Upgrade immediately.
