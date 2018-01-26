@@ -173,7 +173,7 @@ final class Woomizer_Hooks {
 	 */
 	public function product_add_to_cart_text( $text, $product ) {
 
-		$custom_text = get_theme_mod( $this->setting_prefix( 'add_to_cart_button_' ) . $product->get_type() );
+		$custom_text = get_theme_mod( $this->setting_prefix( 'add_to_cart_button_' . $product->get_type() ) );
 
 		if ( empty( $custom_text ) ) {
 			return $text;
