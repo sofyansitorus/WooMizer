@@ -1,8 +1,8 @@
 === Woomizer ===
 Contributors: sofyansitorus
 Tags: woocommerce,customizer,woocommerce-customizer
-Requires at least: 1.1.1
-Tested up to: 1.2.0
+Requires at least: 4.8.0
+Tested up to: 4.9.2
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPL-2.0+
