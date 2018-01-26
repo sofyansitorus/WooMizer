@@ -1,9 +1,9 @@
 <?php
 /**
- * Base class customizer setting fields
+ * Wrapper for WP_Customize_Manager class to simplify to build the customizer settings.
  *
  * @link       https://github.com/sofyansitorus
- * @since      1.1.0
+ * @since      1.2.0
  *
  * @package    Woomizer
  * @subpackage Woomizer/includes
@@ -12,7 +12,7 @@
 /**
  * Woomizer_Setting classes
  *
- * @since      1.1.0
+ * @since      1.2.0
  * @package    Woomizer
  * @subpackage Woomizer/includes
  * @author     Sofyan Sitorus <sofyansitorus@gmail.com>
@@ -22,7 +22,7 @@ class Woomizer_Setting {
 	/**
 	 * Customizer manager.
 	 *
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 * @var WP_Customize_Manager
 	 */
 	public $manager;
@@ -30,7 +30,7 @@ class Woomizer_Setting {
 	/**
 	 * All settings data tied to the woomizer.
 	 *
-	 * @since 3.4.0
+	 * @since 1.2.0
 	 * @var array
 	 */
 	private $data = array(
@@ -44,7 +44,7 @@ class Woomizer_Setting {
 	/**
 	 * Prefix for panel.
 	 *
-	 * @since 3.4.0
+	 * @since 1.2.0
 	 * @var tring
 	 */
 	private $panel_prefix = 'woomizer_panel';
@@ -52,7 +52,7 @@ class Woomizer_Setting {
 	/**
 	 * Current panel ID defined.
 	 *
-	 * @since 3.4.0
+	 * @since 1.2.0
 	 * @var array
 	 */
 	private $current_panel_id;
@@ -60,7 +60,7 @@ class Woomizer_Setting {
 	/**
 	 * Prefix for section.
 	 *
-	 * @since 3.4.0
+	 * @since 1.2.0
 	 * @var tring
 	 */
 	private $section_prefix = 'woomizer_section';
@@ -68,7 +68,7 @@ class Woomizer_Setting {
 	/**
 	 * Current section ID defined.
 	 *
-	 * @since 3.4.0
+	 * @since 1.2.0
 	 * @var array
 	 */
 	private $current_section_id;
@@ -76,7 +76,7 @@ class Woomizer_Setting {
 	/**
 	 * Prefix for setting.
 	 *
-	 * @since 3.4.0
+	 * @since 1.2.0
 	 * @var tring
 	 */
 	private $setting_prefix = 'woomizer_setting';
@@ -84,7 +84,7 @@ class Woomizer_Setting {
 	/**
 	 * Current setting ID defined.
 	 *
-	 * @since 3.4.0
+	 * @since 1.2.0
 	 * @var array
 	 */
 	private $current_setting_id;
@@ -92,7 +92,7 @@ class Woomizer_Setting {
 	/**
 	 * Current control ID defined.
 	 *
-	 * @since 3.4.0
+	 * @since 1.2.0
 	 * @var array
 	 */
 	private $current_control_id;
@@ -100,7 +100,7 @@ class Woomizer_Setting {
 	/**
 	 * Current partial ID defined.
 	 *
-	 * @since 3.4.0
+	 * @since 1.2.0
 	 * @var array
 	 */
 	private $current_partial_id;
@@ -112,7 +112,7 @@ class Woomizer_Setting {
 	 *
 	 * If `$args['settings']` is not defined, use the $id as the setting ID.
 	 *
-	 * @since 3.4.0
+	 * @since 1.2.0
 	 *
 	 * @param WP_Customize_Manager $manager Customizer bootstrap instance.
 	 * @param array                $args    {
@@ -190,7 +190,7 @@ class Woomizer_Setting {
 	/**
 	 * Add a customize section.
 	 *
-	 * @since 3.4.0
+	 * @since 1.2.0
 	 * @since 4.5.0 Return added WP_Customize_Section instance.
 	 *
 	 * @param WP_Customize_Section|string $id   Customize Section object, or Section ID.
@@ -241,7 +241,7 @@ class Woomizer_Setting {
 	/**
 	 * Add a customize setting.
 	 *
-	 * @since 3.4.0
+	 * @since 1.2.0
 	 * @since 4.5.0 Return added WP_Customize_Setting instance.
 	 *
 	 * @param WP_Customize_Setting|string $id   Customize Setting object, or ID.
@@ -326,7 +326,7 @@ class Woomizer_Setting {
 	/**
 	 * Add a customize control.
 	 *
-	 * @since 3.4.0
+	 * @since 1.2.0
 	 * @since 4.5.0 Return added WP_Customize_Control instance.
 	 *
 	 * @param WP_Customize_Control|string $id   Customize Control object, or ID.

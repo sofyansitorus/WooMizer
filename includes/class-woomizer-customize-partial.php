@@ -1,9 +1,9 @@
 <?php
 /**
- * Customize API: WP_Customize_Partial class
+ * Extend Customize API WP_Customize_Partial class
  *
  * @link       https://github.com/sofyansitorus
- * @since      1.1.0
+ * @since      1.2.0
  *
  * @package    Woomizer
  * @subpackage Woomizer/includes
@@ -16,7 +16,7 @@
  * selectively refreshed when an associated setting is changed.
  * This class is analogous of WP_Customize_Control.
  *
- * @since      1.1.0
+ * @since      1.2.0
  * @package    Woomizer
  * @subpackage Woomizer/includes
  * @author     Sofyan Sitorus <sofyansitorus@gmail.com>

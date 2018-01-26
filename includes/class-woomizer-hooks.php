@@ -3,7 +3,7 @@
  * Class that handle hooks to modify the the woocommerce.
  *
  * @link       https://github.com/sofyansitorus
- * @since      1.1.0
+ * @since      1.2.0
  *
  * @package    Woomizer
  * @subpackage Woomizer/includes
@@ -12,7 +12,7 @@
 /**
  * Woomizer_Hooks class.
  *
- * @since      1.1.0
+ * @since      1.2.0
  * @package    Woomizer
  * @subpackage Woomizer/includes
  * @author     Sofyan Sitorus <sofyansitorus@gmail.com>
@@ -22,7 +22,7 @@ final class Woomizer_Hooks {
 	/**
 	 * Hold an instance of the class
 	 *
-	 * @since    1.1.0
+	 * @since    1.2.0
 	 * @var \Woomizer
 	 */
 	private static $_instance = null;
@@ -38,7 +38,7 @@ final class Woomizer_Hooks {
 	/**
 	 * Call this method to get singleton
 	 *
-	 * @since    1.1.0
+	 * @since    1.2.0
 	 * @return Woomizer
 	 */
 	public static function init() {
@@ -51,7 +51,7 @@ final class Woomizer_Hooks {
 	/**
 	 * Constructor for your shipping class
 	 *
-	 * @since    1.1.0
+	 * @since    1.2.0
 	 */
 	private function __construct() {
 
@@ -123,7 +123,7 @@ final class Woomizer_Hooks {
 	/**
 	 * Filter the customizer dynamic settings.
 	 *
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 * @param array  $args Customiser setting arguments.
 	 * @param string $id Customiser setting ID.
 	 * @return array
@@ -138,7 +138,7 @@ final class Woomizer_Hooks {
 	/**
 	 * Filter flash sale text for all products.
 	 *
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 * @param string $text Current flash sale text.
 	 * @return string
 	 */
@@ -166,7 +166,7 @@ final class Woomizer_Hooks {
 	/**
 	 * Filter add to cart button text for product loop.
 	 *
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 * @param string      $text Current button text.
 	 * @param \WC_Product $product Current product object.
 	 * @return string
@@ -230,7 +230,7 @@ final class Woomizer_Hooks {
 	/**
 	 * Filter add to cart button text for product single.
 	 *
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 * @param string      $text Current button text.
 	 * @param \WC_Product $product Current product object.
 	 * @return string
@@ -246,7 +246,7 @@ final class Woomizer_Hooks {
 	/**
 	 * Filter the default product tabs.
 	 *
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 * @param array $tabs Current product tabs.
 	 * @return array
 	 */
@@ -311,7 +311,7 @@ final class Woomizer_Hooks {
 	/**
 	 * Filter submit order button text.
 	 *
-	 * @since 1.1.0
+	 * @since 1.2.0
 	 * @param string $text Current order button text.
 	 * @return string
 	 */

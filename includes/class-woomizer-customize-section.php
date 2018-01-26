@@ -1,9 +1,9 @@
 <?php
 /**
- * Wrapper class for WP_Customize_Manager::add_section()
+ * Extend WordPress Customize Section classes
  *
  * @link       https://github.com/sofyansitorus
- * @since      1.1.0
+ * @since      1.2.0
  *
  * @package    Woomizer
  * @subpackage Woomizer/includes
@@ -12,7 +12,7 @@
 /**
  * Woomizer_Customize_Section classes
  *
- * @since      1.1.0
+ * @since      1.2.0
  * @package    Woomizer
  * @subpackage Woomizer/includes
  * @author     Sofyan Sitorus <sofyansitorus@gmail.com>

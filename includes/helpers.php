@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Humanize slug to make them readable.
  *
- * @since 1.1.0
+ * @since 1.2.0
  * @param string $slug Slug string that will be humanized.
  * @param string $prefix Prefix that will be removed.
  * @return string
@@ -60,7 +60,7 @@ function woomizer_humanize( $slug, $prefix = WOOMIZER_PREFIX ) {
 /**
  * Add prefix if not exist.
  *
- * @since 1.1.0
+ * @since 1.2.0
  * @param string $string String that will be prefixed.
  * @param string $prefix Prefix that will be placed.
  * @return string
@@ -78,7 +78,7 @@ function woomizer_autoprefix( $string, $prefix = WOOMIZER_PREFIX ) {
 /**
  * Add prefix if not exist.
  *
- * @since 1.1.0
+ * @since 1.2.0
  * @param string $string String that will converted to class case.
  * @return string
  */
@@ -89,7 +89,7 @@ function woomizer_class_case( $string ) {
 /**
  * Get preview URL on customizer section expanded.
  *
- * @since 1.1.0
+ * @since 1.2.0
  * @param string $section Expanded section ID.
  * @return string
  */
