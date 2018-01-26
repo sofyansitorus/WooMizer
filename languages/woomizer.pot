@@ -1,144 +1,111 @@
-#, fuzzy
+# Copyright (C) 2018 Woomizer
+# This file is distributed under the same license as the Woomizer package.
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"Project-Id-Version: Woomizer\n"
-"POT-Creation-Date: 2018-01-24 05:43+0700\n"
-"PO-Revision-Date: 2018-01-24 05:42+0700\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"Project-Id-Version: Woomizer 1.1.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woomizer\n"
+"POT-Creation-Date: 2018-01-26 14:44:00+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: woomizer.php\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.js\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: includes/class-woomizer.php:116
-msgid "Global"
+#: includes/class-woomizer-customize-panel.php:45
+msgid "Press return or enter to open this panel"
 msgstr ""
 
-#: includes/class-woomizer.php:125
-msgid "Product Loop"
+#: includes/class-woomizer-customize-panel.php:65
+#: includes/class-woomizer-customize-section.php:43
+msgid "Back"
 msgstr ""
 
-#: includes/class-woomizer.php:134
-msgid "Product Single"
+#. translators: %s: the site/panel title in the Customizer
+
+#: includes/class-woomizer-customize-panel.php:70
+msgid "You are customizing %s"
 msgstr ""
 
-#: includes/class-woomizer.php:143
-msgid "Cart"
+#: includes/class-woomizer-customize-panel.php:74
+#: includes/class-woomizer-customize-section.php:52
+msgid "Help"
 msgstr ""
 
-#: includes/class-woomizer.php:152
-msgid "Checkout"
+#: includes/class-woomizer-customize-section.php:37
+msgid "Press return or enter to open this section"
 msgstr ""
 
-#: includes/controls/class-woomizer-control-product-tabs.php:45
-msgid "Description Tab"
+#: includes/class-woomizer.php:90
+msgid "Customize"
 msgstr ""
 
-#: includes/controls/class-woomizer-control-product-tabs.php:46
-msgid "Additional Information Tab"
-msgstr ""
-
-#: includes/controls/class-woomizer-control-product-tabs.php:47
-msgid "Reviews Tab"
-msgstr ""
-
-#: includes/controls/class-woomizer-control-product-tabs.php:59
-#: includes/sections/class-woomizer-section-product-single.php:60
-msgid "Description"
-msgstr ""
-
-#: includes/controls/class-woomizer-control-product-tabs.php:61
-#: includes/sections/class-woomizer-section-product-single.php:62
-msgid "Additional Information"
-msgstr ""
-
-#: includes/controls/class-woomizer-control-product-tabs.php:64
-#: includes/sections/class-woomizer-section-product-single.php:65
-#, php-format
-msgid "Reviews (%d)"
-msgstr ""
-
-#: includes/controls/class-woomizer-control-product-tabs.php:84
-msgid "Hide Tab"
-msgstr ""
-
-#: includes/controls/class-woomizer-control-product-tabs.php:86
-#: includes/sections/class-woomizer-section-cart.php:54
-msgid "Yes"
-msgstr ""
-
-#: includes/controls/class-woomizer-control-product-tabs.php:90
-msgid "Tab Title Text"
-msgstr ""
-
-#: includes/sections/class-woomizer-section-cart.php:51
-msgid "Display Cross Sells"
-msgstr ""
-
-#: includes/sections/class-woomizer-section-cart.php:55
-msgid "No"
-msgstr ""
-
-#: includes/sections/class-woomizer-section-checkout.php:43
-msgid "Place order"
-msgstr ""
-
-#: includes/sections/class-woomizer-section-checkout.php:50
-msgid "Submit Order button"
-msgstr ""
-
-#: includes/sections/class-woomizer-section-global.php:43
+#: includes/class-woomizer.php:120 includes/class-woomizer.php:165
 msgid "Sale!"
 msgstr ""
 
-#: includes/sections/class-woomizer-section-global.php:51
-msgid "Flash sale text"
-msgstr ""
-
-#: includes/sections/class-woomizer-section-product-loop.php:56
-#: includes/sections/class-woomizer-section-product-single.php:42
+#: includes/class-woomizer.php:128 includes/class-woomizer.php:173
 msgid "Add to Cart"
 msgstr ""
 
-#: includes/sections/class-woomizer-section-product-loop.php:64
-msgid "Simple Product"
-msgstr ""
-
-#: includes/sections/class-woomizer-section-product-loop.php:72
+#: includes/class-woomizer.php:136
 msgid "Select options"
 msgstr ""
 
-#: includes/sections/class-woomizer-section-product-loop.php:80
-msgid "Variable Product"
-msgstr ""
-
-#: includes/sections/class-woomizer-section-product-loop.php:88
+#: includes/class-woomizer.php:144
 msgid "View products"
 msgstr ""
 
-#: includes/sections/class-woomizer-section-product-loop.php:96
-msgid "Grouped Product"
+#: includes/class-woomizer.php:211
+msgid "Display Cross Sells"
 msgstr ""
 
-#: includes/sections/class-woomizer-section-product-single.php:50
-msgid "Add to cart button text"
+#: includes/class-woomizer.php:214
+#: includes/controls/class-woomizer-control-product-tabs.php:77
+msgid "Yes"
 msgstr ""
 
-#: includes/sections/class-woomizer-section-product-single.php:78
-msgid "Products Tabs"
+#: includes/class-woomizer.php:215
+msgid "No"
 msgstr ""
 
+#: includes/class-woomizer.php:227
+msgid "Place order"
+msgstr ""
+
+#: includes/controls/class-woomizer-control-product-tabs.php:36
+msgid "Description Tab"
+msgstr ""
+
+#: includes/controls/class-woomizer-control-product-tabs.php:37
+msgid "Additional Information Tab"
+msgstr ""
+
+#: includes/controls/class-woomizer-control-product-tabs.php:38
+msgid "Reviews Tab"
+msgstr ""
+
+#: includes/controls/class-woomizer-control-product-tabs.php:50
+msgid "Description"
+msgstr ""
+
+#: includes/controls/class-woomizer-control-product-tabs.php:52
+msgid "Additional Information"
+msgstr ""
+
+#. Translators: Reviews count.
+
+#: includes/controls/class-woomizer-control-product-tabs.php:55
+msgid "Reviews (%d)"
+msgstr ""
+
+#: includes/controls/class-woomizer-control-product-tabs.php:75
+msgid "Hide Tab"
+msgstr ""
+
+#: includes/controls/class-woomizer-control-product-tabs.php:81
+msgid "Tab Title Text"
+msgstr ""
 #. Plugin Name of the plugin/theme
 msgid "Woomizer"
 msgstr ""
