@@ -50,6 +50,7 @@ if ( ! function_exists( 'woomizer_init' ) ) {
 
 	// Include the dependencies.
 	require_once WOOMIZER_PATH . 'includes/helpers.php';
+	require_once WOOMIZER_PATH . 'includes/class-woomizer-hooks.php';
 	require_once WOOMIZER_PATH . 'includes/class-woomizer-setting.php';
 	require_once WOOMIZER_PATH . 'includes/class-woomizer.php';
 

@@ -62,28 +62,7 @@ final class Woomizer {
 		add_action( 'customize_controls_enqueue_scripts', array( $this, 'customize_controls_enqueue_scripts' ), 99 );
 
 		// Filter settings arguments.
-		add_filter( 'customize_dynamic_setting_args', array( $this, 'dynamic_setting_args' ), 99, 2 );
-
-		// Filter product tabs.
-		add_filter( 'woocommerce_product_tabs', array( $this, 'product_tabs' ), 99 );
-
-		// Filter add to cart button text for product single.
-		add_filter( 'woocommerce_product_single_add_to_cart_text', array( $this, 'single_add_to_cart_btn_text' ), 99, 2 );
-
-		// Filter add to cart button text for product loop.
-		add_filter( 'woocommerce_product_add_to_cart_text', array( $this, 'loop_add_to_cart_btn_text' ), 99, 2 );
-
-		// Filter add to cart button text for product loop.
-		add_filter( 'woocommerce_sale_flash', array( $this, 'sale_flash_text' ), 99 );
-
-		// Filter submit order button text.
-		add_filter( 'woocommerce_order_button_text', array( $this, 'order_button_text' ), 99 );
-
-		// Filter number of products per row.
-		add_filter( 'loop_shop_columns', array( $this, 'loop_columns' ), 99 );
-
-		// Filter number of products per page.
-		add_filter( 'loop_shop_per_page', array( $this, 'loop_shop_per_page' ), 99 );
+		Woomizer_Hooks::init();
 	}
 
 	/**
@@ -170,7 +149,8 @@ final class Woomizer {
 		$setting->add_setting(
 			'product_grid',
 			array(
-				'control' => array(
+				'transport' => 'refresh',
+				'control'   => array(
 					'type' => 'product_grid',
 				),
 			)
@@ -216,7 +196,6 @@ final class Woomizer {
 						}
 
 						woocommerce_output_product_data_tabs();
-
 					},
 				),
 			)
@@ -298,16 +277,6 @@ final class Woomizer {
 			WOOMIZER_VERSION, // Define a version (optional).
 			false // Specify whether to put in footer (leave this true).
 		);
-
-		// Localize the script data.
-		wp_localize_script(
-			'woomizer-live-preview',
-			'woomizer_live_preview_params',
-			array(
-				'prefix'       => WOOMIZER_PREFIX,
-				'cart_page_id' => get_option( 'woocommerce_cart_page_id', '0' ),
-			)
-		);
 	}
 
 	/**
@@ -342,196 +311,6 @@ final class Woomizer {
 				),
 			)
 		);
-	}
-
-	/**
-	 * Filter the customizer dynamic settings.
-	 *
-	 * @since 1.1.0
-	 * @param array  $args Customiser setting arguments.
-	 * @param string $id Customiser setting ID.
-	 * @return array
-	 */
-	public function dynamic_setting_args( $args, $id ) {
-		if ( 0 === strpos( $id, WOOMIZER_PREFIX ) && isset( $args['default'] ) && is_array( $args['default'] ) ) {
-			$args['default'] = wp_json_encode( $args['default'] );
-		}
-		return $args;
-	}
-
-	/**
-	 * Filter the default product tabs.
-	 *
-	 * @since 1.1.0
-	 * @param array $tabs Current product tabs.
-	 * @return array
-	 */
-	public function product_tabs( $tabs ) {
-		global $product, $post;
-
-		$tab_keys = array(
-			'description',
-			'additional_information',
-			'reviews',
-		);
-
-		$options = get_theme_mod( 'woomizer_product_single_tabs', array() );
-
-		if ( $options && ! is_array( $options ) ) {
-			$options = json_decode( $options, true );
-			if ( json_last_error() !== JSON_ERROR_NONE ) {
-				return $tabs;
-			}
-		}
-
-		if ( ! $options || ! is_array( $options ) ) {
-			return $tabs;
-		}
-
-		foreach ( $tab_keys as $tab_key ) {
-			if ( ! isset( $tabs[ $tab_key ] ) ) {
-				continue;
-			}
-			if ( isset( $options[ $tab_key . '_hidden' ] ) && 'yes' === $options[ $tab_key . '_hidden' ] ) {
-				unset( $tabs[ $tab_key ] );
-				continue;
-			}
-			if ( ! empty( $options[ $tab_key . '_title' ] ) ) {
-				switch ( $tab_key ) {
-					case 'reviews':
-						$tabs[ $tab_key ]['title'] = ( false !== strpos( $options[ $tab_key . '_title' ], '%d' ) && $product instanceof WC_Product ) ? sprintf( $options[ $tab_key . '_title' ], $product->get_review_count() ) : $options[ $tab_key . '_title' ];
-						break;
-
-					default:
-						$tabs[ $tab_key ]['title'] = $options[ $tab_key . '_title' ];
-						break;
-				}
-			}
-		}
-		return $tabs;
-	}
-
-	/**
-	 * Filter add to cart button text for product single.
-	 *
-	 * @since 1.1.0
-	 * @param string      $text Current button text.
-	 * @param \WC_Product $product Current product object.
-	 * @return string
-	 */
-	public function single_add_to_cart_btn_text( $text, $product ) {
-		$custom_text = get_theme_mod( 'woomizer_product_single_add_to_cart_btn_text' );
-		if ( empty( $custom_text ) ) {
-			return $text;
-		}
-		return $custom_text;
-	}
-
-	/**
-	 * Filter add to cart button text for product loop.
-	 *
-	 * @since 1.1.0
-	 * @param string      $text Current button text.
-	 * @param \WC_Product $product Current product object.
-	 * @return string
-	 */
-	public function loop_add_to_cart_btn_text( $text, $product ) {
-
-		$custom_text = get_theme_mod( 'woomizer_product_loop_add_to_cart_btn_text_' . $product->get_type() );
-
-		if ( empty( $custom_text ) ) {
-			return $text;
-		}
-
-		switch ( $product->get_type() ) {
-			case 'simple':
-				if ( $product->is_purchasable() && $product->is_in_stock() ) {
-					$text = $custom_text;
-				}
-				break;
-			case 'variable':
-				if ( $product->is_purchasable() ) {
-					$text = $custom_text;
-				}
-				break;
-			case 'grouped':
-				$text = $custom_text;
-				break;
-		}
-		return $text;
-	}
-
-	/**
-	 * Filter flash sale text for all products.
-	 *
-	 * @since 1.1.0
-	 * @param string $text Current flash sale text.
-	 * @return string
-	 */
-	public function sale_flash_text( $text ) {
-
-		static $is_single_defined = false;
-
-		switch ( true ) {
-			case ! $is_single_defined && is_product() && is_main_query():
-				$is_single_defined = true;
-				$custom_text       = get_theme_mod( 'woomizer_product_single_flash_sale_text' );
-				break;
-
-			default:
-				$custom_text = get_theme_mod( 'woomizer_product_loop_flash_sale_text' );
-				break;
-		}
-
-		if ( empty( $custom_text ) ) {
-			return $text;
-		}
-		return '<span class="onsale">' . esc_html( $custom_text ) . '</span>';
-	}
-
-	/**
-	 * Filter submit order button text.
-	 *
-	 * @since 1.1.0
-	 * @param string $text Current order button text.
-	 * @return string
-	 */
-	public function order_button_text( $text ) {
-		$custom_text = get_theme_mod( 'woomizer_checkout_submit_order_button_text' );
-		if ( empty( $custom_text ) ) {
-			return $text;
-		}
-		return $custom_text;
-	}
-
-	/**
-	 * Set number of products per row.
-	 *
-	 * @since 1.1.1
-	 * @param int $col Current number of products per row.
-	 * @return int
-	 */
-	public function loop_columns( $col ) {
-		$grids = explode( 'x', get_theme_mod( 'woomizer_product_loop_grid' ) );
-		if ( count( $grids ) === 2 && absint( $grids[0] ) ) {
-			return $grids[0];
-		}
-		return $col;
-	}
-
-	/**
-	 * Set number of products per page.
-	 *
-	 * @since 1.1.1
-	 * @param int $per_page Current number of products per page.
-	 * @return int
-	 */
-	public function loop_shop_per_page( $per_page ) {
-		$grids = explode( 'x', get_theme_mod( 'woomizer_product_loop_grid' ) );
-		if ( count( $grids ) === 2 && absint( $grids[0] ) && absint( $grids[0] ) ) {
-			return $grids[0] * $grids[1];
-		}
-		return $per_page;
 	}
 
 }
