@@ -33,9 +33,9 @@ class Woomizer_Control_Product_Tabs extends Woomizer_Customize_Control {
 	 */
 	public function render_content() {
 		$tabs           = array(
-			'description'            => __( 'Description Tab' ),
-			'additional_information' => __( 'Additional Information Tab' ),
-			'reviews'                => __( 'Reviews Tab' ),
+			'description'            => __( 'Description Tab', 'woomizer' ),
+			'additional_information' => __( 'Additional Information Tab', 'woomizer' ),
+			'reviews'                => __( 'Reviews Tab', 'woomizer' ),
 		);
 		$input_id       = '_customize-input-' . $this->id;
 		$description_id = '_customize-description-' . $this->id;

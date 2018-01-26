@@ -42,7 +42,7 @@ class Woomizer_Customize_Panel extends WP_Customize_Panel {
 		<li id="accordion-panel-{{ data.id }}" class="accordion-section control-section control-panel control-panel-{{ data.type }} woomizer-panel woomizer-panel-{{ data.type }}">
 			<h3 class="accordion-section-title" tabindex="0">
 				{{ data.title }}
-				<span class="screen-reader-text"><?php _e( 'Press return or enter to open this panel' ); ?></span>
+				<span class="screen-reader-text"><?php _e( 'Press return or enter to open this panel', 'woomizer' ); ?></span>
 			</h3>
 			<ul class="accordion-sub-container control-panel-content"></ul>
 		</li>
@@ -62,16 +62,16 @@ class Woomizer_Customize_Panel extends WP_Customize_Panel {
 	protected function content_template() {
 		?>
 		<li class="panel-meta customize-info accordion-section <# if ( ! data.description ) { #> cannot-expand<# } #>">
-			<button class="customize-panel-back" tabindex="-1"><span class="screen-reader-text"><?php _e( 'Back' ); ?></span></button>
+			<button class="customize-panel-back" tabindex="-1"><span class="screen-reader-text"><?php _e( 'Back', 'woomizer' ); ?></span></button>
 			<div class="accordion-section-title">
 				<span class="preview-notice">
 				<?php
 					/* translators: %s: the site/panel title in the Customizer */
-					echo sprintf( __( 'You are customizing %s' ), '<strong class="panel-title">{{ data.title }}</strong>' );
+					echo sprintf( __( 'You are customizing %s', 'woomizer' ), '<strong class="panel-title">{{ data.title }}</strong>' );
 				?>
 				</span>
 				<# if ( data.description ) { #>
-					<button type="button" class="customize-help-toggle dashicons dashicons-editor-help" aria-expanded="false"><span class="screen-reader-text"><?php _e( 'Help' ); ?></span></button>
+					<button type="button" class="customize-help-toggle dashicons dashicons-editor-help" aria-expanded="false"><span class="screen-reader-text"><?php _e( 'Help', 'woomizer' ); ?></span></button>
 				<# } #>
 			</div>
 			<# if ( data.description ) { #>
