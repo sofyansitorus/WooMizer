@@ -25,15 +25,15 @@
 
 		_bindSettings: function () {
 			var self = this;
-			
+
 			// Product loop settings section.
-			self._injectText('flash_sale_loop', $('.woocommerce-loop-product__link').closest('.product').find('.onsale'));
+			self._injectText('flash_sale_loop', $(".archive .product .onsale, .single .product .product .onsale"));
 			self._injectText('add_to_cart_button_simple', $('.product-type-simple .product_type_simple'));
 			self._injectText('add_to_cart_button_variable', $('.product-type-variable .product_type_variable'));
 			self._injectText('add_to_cart_button_grouped', $('.product-type-grouped .product_type_grouped'));
 
 			// Product single settings section.
-			self._injectText('flash_sale_single', $('.woocommerce-product-details__short-description').closest('.product').find('.onsale').first());
+			self._injectText('flash_sale_single', $(".single .product .onsale").not(".single .product .product .onsale"));
 			self._injectText('add_to_cart_button', $('.single-product .single_add_to_cart_button'));
 			self._customCallback('product_tabs', function (setting, settingId) {
 				self.api.selectiveRefresh.bind('partial-content-rendered', function (placement) {
