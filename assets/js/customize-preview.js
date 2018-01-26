@@ -9,10 +9,10 @@
 	}
 
 	/**
-	 * wp.customize.woomizerLivePreview
+	 * woomizerCustomizePreview
 	 *
 	 */
-	var woomizerLivePreview = {
+	var woomizerCustomizePreview = {
 
 		settingPrefix: 'woomizer_setting',
 
@@ -111,7 +111,7 @@
 	};
 
 	$(document).ready(function () {
-		woomizerLivePreview.init(wp.customize);
+		woomizerCustomizePreview.init(wp.customize);
 	});
 
 })(window.wp, jQuery);

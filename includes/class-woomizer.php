@@ -255,11 +255,11 @@ final class Woomizer {
 	public function customize_preview_init() {
 
 		// Choose which css file will be enqueued based on environtment.
-		$css_file = ( defined( 'WOOMIZER_DEV' ) && WOOMIZER_DEV ) ? add_query_arg( array( 't' => time() ), WOOMIZER_URL . 'assets/css/live-preview.css' ) : WOOMIZER_URL . 'assets/css/live-preview.min.css';
+		$css_file = ( defined( 'WOOMIZER_DEV' ) && WOOMIZER_DEV ) ? add_query_arg( array( 't' => time() ), WOOMIZER_URL . 'assets/css/customize-preview.css' ) : WOOMIZER_URL . 'assets/css/customize-preview.min.css';
 
 		// Enqueue js script.
 		wp_enqueue_style(
-			'woomizer-live-preview', // Give the script a unique ID.
+			'woomizer-customize-preview', // Give the script a unique ID.
 			$css_file, // Define the path to the JS file.
 			array(), // Define dependencies.
 			WOOMIZER_VERSION, // Define a version (optional).
@@ -267,11 +267,11 @@ final class Woomizer {
 		);
 
 		// Choose which js file will be enqueued based on environtment.
-		$js_file = ( defined( 'WOOMIZER_DEV' ) && WOOMIZER_DEV ) ? add_query_arg( array( 't' => time() ), WOOMIZER_URL . 'assets/js/live-preview.js' ) : WOOMIZER_URL . 'assets/js/live-preview.min.js';
+		$js_file = ( defined( 'WOOMIZER_DEV' ) && WOOMIZER_DEV ) ? add_query_arg( array( 't' => time() ), WOOMIZER_URL . 'assets/js/customize-preview.js' ) : WOOMIZER_URL . 'assets/js/customize-preview.min.js';
 
 		// Enqueue js script.
 		wp_enqueue_script(
-			'woomizer-live-preview', // Give the script a unique ID.
+			'woomizer-customize-preview', // Give the script a unique ID.
 			$js_file, // Define the path to the JS file.
 			array( 'jquery', 'customize-preview' ), // Define dependencies.
 			WOOMIZER_VERSION, // Define a version (optional).
