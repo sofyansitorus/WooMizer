@@ -49,9 +49,8 @@ if ( ! function_exists( 'woomizer_init' ) ) {
 	define( 'WOOMIZER_PREFIX', 'woomizer' );
 
 	// Include the dependencies.
+	require_once WOOMIZER_PATH . 'includes/helpers.php';
 	require_once WOOMIZER_PATH . 'includes/class-woomizer-setting.php';
-	require_once WOOMIZER_PATH . 'includes/class-woomizer-panel.php';
-	require_once WOOMIZER_PATH . 'includes/class-woomizer-section.php';
 	require_once WOOMIZER_PATH . 'includes/class-woomizer.php';
 
 	/**
