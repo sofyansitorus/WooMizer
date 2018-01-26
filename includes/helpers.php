@@ -85,3 +85,40 @@ function woomizer_autoprefix( $string, $prefix = WOOMIZER_PREFIX ) {
 function woomizer_class_case( $string ) {
 	return implode( '_', array_map( 'ucwords', explode( '_', $string ) ) );
 }
+
+/**
+ * Get preview URL on customizer section expanded.
+ *
+ * @since 1.1.0
+ * @param string $section Expanded section ID.
+ * @return string
+ */
+function woomizer_preview_url( $section ) {
+	$url = '';
+	switch ( $section ) {
+		case 'product_loop':
+			$id  = woocommerce_get_page_id( 'shop' );
+			$url = ! empty( $id ) ? get_permalink( $id ) : '';
+			break;
+		case 'product_single':
+			$ids = get_posts(
+				array(
+					'fields'        => 'ids',
+					'no_found_rows' => true,
+					'numberposts'   => 1,
+					'post_type'     => 'product',
+				)
+			);
+			$url = ! empty( $ids ) ? get_permalink( $ids[0] ) : '';
+			break;
+		case 'cart':
+			$id  = woocommerce_get_page_id( 'cart' );
+			$url = ! empty( $id ) ? get_permalink( $id ) : '';
+			break;
+		case 'checkout':
+			$id  = woocommerce_get_page_id( 'checkout' );
+			$url = ! empty( $id ) ? get_permalink( $id ) : '';
+			break;
+	}
+	return apply_filters( 'woomizer_preview_url', $url, $section );
+}

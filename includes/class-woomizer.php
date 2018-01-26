@@ -59,7 +59,7 @@ final class Woomizer {
 		add_action( 'customize_preview_init', array( $this, 'customize_preview_init' ), 99 );
 
 		// Enqueue front scripts and styles.
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 99 );
+		add_action( 'customize_controls_enqueue_scripts', array( $this, 'customize_controls_enqueue_scripts' ), 99 );
 
 		// Filter settings arguments.
 		add_filter( 'customize_dynamic_setting_args', array( $this, 'dynamic_setting_args' ), 99, 2 );
@@ -311,52 +311,34 @@ final class Woomizer {
 	}
 
 	/**
-	 * Enqueue front scripts and styles.
+	 * Enqueue scripts and styles for WP Theme Customizer
 	 *
 	 * @since 1.1.0
 	 */
-	public function enqueue_scripts() {
-
-		// Disable if customizer preview.
-		if ( is_customize_preview() ) {
-			return;
-		}
-
-		// Choose which css file will be enqueued based on environtment.
-		$css_file = ( defined( 'WOOMIZER_DEV' ) && WOOMIZER_DEV ) ? add_query_arg( array( 't' => time() ), WOOMIZER_URL . 'assets/css/woomizer.css' ) : WOOMIZER_URL . 'assets/css/woomizer.min.css';
-
-		// Enqueue js script.
-		wp_enqueue_style(
-			'woomizer', // Give the script a unique ID.
-			$css_file, // Define the path to the JS file.
-			array(), // Define dependencies.
-			WOOMIZER_VERSION, // Define a version (optional).
-			false // Specify whether to put in footer (leave this false).
-		);
+	public function customize_controls_enqueue_scripts() {
 
 		// Choose which js file will be enqueued based on environtment.
-		$js_file = ( defined( 'WOOMIZER_DEV' ) && WOOMIZER_DEV ) ? add_query_arg( array( 't' => time() ), WOOMIZER_URL . 'assets/js/woomizer.js' ) : WOOMIZER_URL . 'assets/js/woomizer.min.js';
+		$js_file = ( defined( 'WOOMIZER_DEV' ) && WOOMIZER_DEV ) ? add_query_arg( array( 't' => time() ), WOOMIZER_URL . 'assets/js/woomizer-customize.js' ) : WOOMIZER_URL . 'assets/js/woomizer-customize.min.js';
 
 		// Enqueue js script.
 		wp_enqueue_script(
-			'woomizer', // Give the script a unique ID.
+			'woomizer-customize', // Give the script a unique ID.
 			$js_file, // Define the path to the JS file.
-			array( 'jquery' ), // Define dependencies.
+			array( 'jquery', 'customize-controls' ), // Define dependencies.
 			WOOMIZER_VERSION, // Define a version (optional).
 			true // Specify whether to put in footer (leave this true).
 		);
 
 		// Localize the script data.
 		wp_localize_script(
-			'woomizer',
-			'woomizer_params',
+			'woomizer-customize',
+			'woomizer_customize_params',
 			array(
-				'prefix'          => WOOMIZER_PREFIX,
-				'toggle_elements' => array(
-					'cart_display_cross_sells' => array(
-						'selector' => '.cart-collaterals .cross-sells',
-						'value'    => get_theme_mod( 'woomizer_cart_display_cross_sells' ),
-					),
+				'url' => array(
+					'product_loop'   => woomizer_preview_url( 'product_loop' ),
+					'product_single' => woomizer_preview_url( 'product_single' ),
+					'cart'           => woomizer_preview_url( 'cart' ),
+					'checkout'       => woomizer_preview_url( 'checkout' ),
 				),
 			)
 		);
