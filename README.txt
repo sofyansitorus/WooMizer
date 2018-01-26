@@ -64,19 +64,24 @@ You can create ticket at GitHub repository:
 
 == Changelog ==
 
-= 1.1.1 - 2018-01-25 =
+= 1.2.0 =
+
+* Improments - Navigating to a URL in the Customizer Preview when a Section is Expanded.
+* Improments - Refactor base code to enable custom customizer structure.
+
+= 1.1.1 =
 
 * Improments - Add new plugin action links.
 * Feature - Add new setting for product grid.
 
-= 1.1.0 - 2018-01-24 =
+= 1.1.0 =
 
 * Feature - Add new setting section for cart page.
 * Feature - Add new setting section for checkout page.
 * Optimizations - Refactor PHP and JS as modular.
 * Fix - Bug for product tabs live preview.
 
-= 1.0.0 - 2018-01-18 =
+= 1.0.0 =
 
 * Feature - Customize add to cart button text for products loop.
 * Feature - Customize add to cart button text for product single.
@@ -85,5 +90,5 @@ You can create ticket at GitHub repository:
 
 == Upgrade Notice ==
 
-= 1.1.1 =
-This version add some improvements and new features. Upgrade immediately.
+= 1.2.0 =
+This version add some improvements. Upgrade immediately.
