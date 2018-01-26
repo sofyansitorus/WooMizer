@@ -9,10 +9,10 @@
 	}
 
 	/**
-	 * woomizerCustomize
+	 * woomizerCustomizeControls
 	 *
 	 */
-	var woomizerCustomize = {
+	var woomizerCustomizeControls = {
 
 		sectionPrefix: 'woomizer_section',
 
@@ -24,10 +24,10 @@
 		},
 
 		_bindSections: function () {
-			this._redirectToUrl('product_loop', woomizer_customize_params.url.product_loop);
-			this._redirectToUrl('product_single', woomizer_customize_params.url.product_single);
-			this._redirectToUrl('cart', woomizer_customize_params.url.cart);
-			this._redirectToUrl('checkout', woomizer_customize_params.url.checkout);
+			this._redirectToUrl('product_loop', woomizer_customize_controls_params.url.product_loop);
+			this._redirectToUrl('product_single', woomizer_customize_controls_params.url.product_single);
+			this._redirectToUrl('cart', woomizer_customize_controls_params.url.cart);
+			this._redirectToUrl('checkout', woomizer_customize_controls_params.url.checkout);
 		},
 
 		_redirectToUrl: function (sectionId, url) {
@@ -66,7 +66,7 @@
 	};
 
 	wp.customize.bind('ready', function () {
-		woomizerCustomize.init(wp.customize);
+		woomizerCustomizeControls.init(wp.customize);
 	});
 
 })(window.wp, jQuery);

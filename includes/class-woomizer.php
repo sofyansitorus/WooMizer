@@ -287,11 +287,11 @@ final class Woomizer {
 	public function customize_controls_enqueue_scripts() {
 
 		// Choose which js file will be enqueued based on environtment.
-		$js_file = ( defined( 'WOOMIZER_DEV' ) && WOOMIZER_DEV ) ? add_query_arg( array( 't' => time() ), WOOMIZER_URL . 'assets/js/woomizer-customize.js' ) : WOOMIZER_URL . 'assets/js/woomizer-customize.min.js';
+		$js_file = ( defined( 'WOOMIZER_DEV' ) && WOOMIZER_DEV ) ? add_query_arg( array( 't' => time() ), WOOMIZER_URL . 'assets/js/customize-controls.js' ) : WOOMIZER_URL . 'assets/js/customize-controls.min.js';
 
 		// Enqueue js script.
 		wp_enqueue_script(
-			'woomizer-customize', // Give the script a unique ID.
+			'woomizer-customize-controls', // Give the script a unique ID.
 			$js_file, // Define the path to the JS file.
 			array( 'jquery', 'customize-controls' ), // Define dependencies.
 			WOOMIZER_VERSION, // Define a version (optional).
@@ -300,8 +300,8 @@ final class Woomizer {
 
 		// Localize the script data.
 		wp_localize_script(
-			'woomizer-customize',
-			'woomizer_customize_params',
+			'woomizer-customize-controls',
+			'woomizer_customize_controls_params',
 			array(
 				'url' => array(
 					'product_loop'   => woomizer_preview_url( 'product_loop' ),
