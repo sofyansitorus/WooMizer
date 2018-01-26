@@ -7,7 +7,7 @@ WooCommerce customizer with live preview.
 **Tags:** [woocommerce](https://wordpress.org/plugins/tags/woocommerce), [customizer](https://wordpress.org/plugins/tags/customizer), [woocommerce-customizer](https://wordpress.org/plugins/tags/woocommerce-customizer)<br>
 **Requires at least:** 4.8.0<br>
 **Tested up to:** 4.9.2<br>
-**Stable tag:** trunk (master)<br>
+**Stable tag:** 1.2.0<br>
 **License:** [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.txt)<br>
 **Requires PHP:** 5.6<br>
 
