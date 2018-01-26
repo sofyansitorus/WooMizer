@@ -107,9 +107,34 @@ function woomizer_preview_url( $section ) {
 					'no_found_rows' => true,
 					'numberposts'   => 1,
 					'post_type'     => 'product',
+					'meta_query'    => array(
+						'relation' => 'OR',
+						array( // Simple products type.
+							'key'     => '_sale_price',
+							'value'   => 0,
+							'compare' => '>',
+							'type'    => 'numeric',
+						),
+						array( // Variable products type.
+							'key'     => '_min_variation_sale_price',
+							'value'   => 0,
+							'compare' => '>',
+							'type'    => 'numeric',
+						),
+					),
 				)
 			);
-			$url = ! empty( $ids ) ? get_permalink( $ids[0] ) : '';
+			if ( empty( $ids ) ) {
+				$ids = get_posts(
+					array(
+						'fields'        => 'ids',
+						'no_found_rows' => true,
+						'numberposts'   => 1,
+						'post_type'     => 'product',
+					)
+				);
+			}
+			$url = ! empty( $ids ) && ! is_singular( 'product' ) ? get_permalink( $ids[0] ) : '';
 			break;
 		case 'cart':
 			$id  = woocommerce_get_page_id( 'cart' );
