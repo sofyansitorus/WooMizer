@@ -5,7 +5,7 @@ WooCommerce customizer with live preview.
 
 **Contributors:** [sofyansitorus](https://profiles.wordpress.org/sofyansitorus)<br>
 **Tags:** [woocommerce](https://wordpress.org/plugins/tags/woocommerce), [customizer](https://wordpress.org/plugins/tags/customizer), [woocommerce-customizer](https://wordpress.org/plugins/tags/woocommerce-customizer)<br>
-**Requires at least:** 4.8<br>
+**Requires at least:** 4.8.0<br>
 **Tested up to:** 4.9.2<br>
 **Stable tag:** trunk (master)<br>
 **License:** [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.txt)<br>
@@ -65,17 +65,17 @@ You can create ticket at GitHub repository:
 ## Changelog ##
 
 ### 1.2.0 ###
-* Improments - Navigating to a URL in the Customizer Preview when a Section is Expanded.
-* Improments - Refactor base code to enable custom customizer structure.
+* Improvement - Navigating to a URL in the Customizer Preview when a Section is Expanded.
+* Improvement - Refactor base code to enable custom customizer structure.
 
 ### 1.1.1 ###
-* Improments - Add new plugin action links.
+* Improvement - Add new plugin action links.
 * Feature - Add new setting for product grid.
 
 ### 1.1.0 ###
 * Feature - Add new setting section for cart page.
 * Feature - Add new setting section for checkout page.
-* Optimizations - Refactor PHP and JS as modular.
+* Improvement - Refactor PHP and JS as modular.
 * Fix - Bug for product tabs live preview.
 
 ### 1.0.0 ###
