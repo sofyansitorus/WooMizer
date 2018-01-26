@@ -64,6 +64,11 @@ You can create ticket at GitHub repository:
 
 == Changelog ==
 
+= 1.2.1 =
+
+* Fix - Wrong selector in customize preview js.
+* Fix - Add to cart button text is not changed.
+
 = 1.2.0 =
 
 * Improvement - Navigating to a URL in the Customizer Preview when a Section is Expanded.
@@ -90,5 +95,5 @@ You can create ticket at GitHub repository:
 
 == Upgrade Notice ==
 
-= 1.2.0 =
-This version add some improvements. Upgrade immediately.
+= 1.2.1 =
+This version include some bugs fix. Upgrade immediately.
