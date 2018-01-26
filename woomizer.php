@@ -15,7 +15,7 @@
  * Plugin Name:       Woomizer
  * Plugin URI:        https://github.com/sofyansitorus/Woomizer
  * Description:       WooCommerce customizer with live preview.
- * Version:           1.1.1
+ * Version:           1.2.0
  * Author:            Sofyan Sitorus
  * Author URI:        https://github.com/sofyansitorus
  * License:           GPL-2.0+
@@ -45,7 +45,7 @@ if ( ! function_exists( 'woomizer_init' ) ) {
 	define( 'WOOMIZER_FILE', __FILE__ );
 	define( 'WOOMIZER_PATH', plugin_dir_path( WOOMIZER_FILE ) );
 	define( 'WOOMIZER_URL', plugin_dir_url( WOOMIZER_FILE ) );
-	define( 'WOOMIZER_VERSION', '1.1.1' );
+	define( 'WOOMIZER_VERSION', '1.2.0' );
 	define( 'WOOMIZER_PREFIX', 'woomizer' );
 
 	// Include the dependencies.
