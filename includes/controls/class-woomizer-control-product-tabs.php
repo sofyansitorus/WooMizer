@@ -17,7 +17,7 @@
  * @subpackage Woomizer/includes/controls
  * @author     Sofyan Sitorus <sofyansitorus@gmail.com>
  */
-class Woomizer_Control_Product_Tabs extends WP_Customize_Control {
+class Woomizer_Control_Product_Tabs extends Woomizer_Customize_Control {
 	/**
 	 * Control's Type.
 	 *
