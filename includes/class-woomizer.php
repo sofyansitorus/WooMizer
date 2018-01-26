@@ -125,54 +125,141 @@ final class Woomizer {
 	 */
 	public function register( $wp_customize ) {
 
-		// Load customizer setting sections dependencies.
-		foreach ( glob( WOOMIZER_PATH . 'includes/sections/class-woomizer-*.php' ) as $filename ) {
-			include_once $filename;
-		}
+		require_once WOOMIZER_PATH . 'includes/class-woomizer-setting.php';
 
-		// Load customizer setting controls dependencies.
-		foreach ( glob( WOOMIZER_PATH . 'includes/controls/class-woomizer-control-*.php' ) as $filename ) {
-			include $filename;
-		}
+		$setting = new Woomizer_Setting( $wp_customize );
 
-		// Register customizer settings panel.
-		$panel = new Woomizer_Panel( $wp_customize );
+		// Start default panel.
+		$setting->add_panel();
 
-		// Register customizer settings section: woomizer_section_product_loop.
-		$section_product_loop = new Woomizer_Section_Product_Loop(
-			$wp_customize,
-			'section_product_loop',
+		// Start product_loop section.
+		$setting->add_section( 'product_loop' );
+
+		$setting->add_setting(
+			'flash_sale_loop',
 			array(
-				'title' => __( 'Product Loop', 'woomizer' ),
+				'default' => __( 'Sale!', 'woomizer' ),
+				'control' => true,
 			)
 		);
 
-		// Register customizer settings section: woomizer_section_product_single.
-		$section_product_loop = new Woomizer_Section_Product_Single(
-			$wp_customize,
-			'section_product_single',
+		$setting->add_setting(
+			'add_to_cart_button_simple',
 			array(
-				'title' => __( 'Product Single', 'woomizer' ),
+				'default' => __( 'Add to Cart', 'woomizer' ),
+				'control' => true,
 			)
 		);
 
-		// Register customizer settings section: woomizer_section_cart.
-		$section_product_loop = new Woomizer_Section_Cart(
-			$wp_customize,
-			'section_cart',
+		$setting->add_setting(
+			'add_to_cart_button_variable',
 			array(
-				'title' => __( 'Cart', 'woomizer' ),
+				'default' => __( 'Select options', 'woomizer' ),
+				'control' => true,
 			)
 		);
 
-		// Register customizer settings section: woomizer_section_checkout.
-		$section_product_loop = new Woomizer_Section_Checkout(
-			$wp_customize,
-			'section_checkout',
+		$setting->add_setting(
+			'add_to_cart_button_grouped',
 			array(
-				'title' => __( 'Checkout', 'woomizer' ),
+				'default' => __( 'View products', 'woomizer' ),
+				'control' => true,
 			)
 		);
+
+		$setting->add_setting(
+			'product_grid',
+			array(
+				'control' => array(
+					'type' => 'product_grid',
+				),
+			)
+		);
+
+		// Start product_single section.
+		$setting->add_section( 'product_single' );
+
+		$setting->add_setting(
+			'flash_sale_single',
+			array(
+				'default' => __( 'Sale!', 'woomizer' ),
+				'control' => true,
+			)
+		);
+
+		$setting->add_setting(
+			'add_to_cart_button',
+			array(
+				'default' => __( 'Add to Cart', 'woomizer' ),
+				'control' => true,
+			)
+		);
+
+		$setting->add_setting(
+			'product_tabs',
+			array(
+				'control' => array(
+					'type' => 'product_tabs',
+				),
+				'partial' => array(
+					'selector'            => '.woocommerce-tabs.wc-tabs-wrapper',
+					'container_inclusive' => true,
+					'render_callback'     => function() {
+						global $product;
+
+						// Try to create new $product object if it was string product slug.
+						if ( ! empty( $product ) && is_string( $product ) ) {
+							$product = get_page_by_path( $product, OBJECT, 'product' );
+							if ( $product ) {
+								$product = wc_get_product( $product->ID );
+							}
+						}
+
+						woocommerce_output_product_data_tabs();
+
+					},
+				),
+			)
+		);
+
+		// Start cart section.
+		$setting->add_section( 'cart' );
+
+		$setting->add_setting(
+			'display_cross_sells',
+			array(
+				'control' => array(
+					'label'   => __( 'Display Cross Sells', 'woomizer' ),
+					'type'    => 'radio',
+					'choices' => array(
+						''     => __( 'Yes', 'woomizer' ),
+						'none' => __( 'No', 'woomizer' ),
+					),
+				),
+			)
+		);
+
+		// Start checkout section.
+		$setting->add_section( 'checkout' );
+
+		$setting->add_setting(
+			'submit_order_button',
+			array(
+				'default' => __( 'Place order', 'woomizer' ),
+				'control' => true,
+				'partial' => array(
+					'selector'            => 'form.woocommerce-checkout',
+					'container_inclusive' => true,
+					'render_callback'     => function() {
+						wc_get_template( 'checkout/form-checkout.php', array( 'checkout' => WC()->checkout() ) );
+					},
+				),
+			)
+		);
+
+		// Build the customizer.
+		$setting->build();
+
 	}
 
 	/**
